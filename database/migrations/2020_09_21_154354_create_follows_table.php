@@ -16,7 +16,7 @@ class CreateFollowsTable extends Migration
         Schema::create('follows', function (Blueprint $table) {
             $table->foreign('user_1')->references('id')->on('users');
             $table->foreign('user_2')->references('id')->on('users');
-            $table->int('status');
+            $table->int('status')->default(0);
             $table->timestamps();
         });
     }
