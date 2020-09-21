@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->text('description');
             $table->string('image')->nullable();
-            $table->int('likes_count')->default(0);
-            $table->int('dislikes_count')->default(0);
-            $table->int('comments_count')->default(0);
+            $table->integer('likes_count')->default(0);
+            $table->integer('dislikes_count')->default(0);
+            $table->integer('comments_count')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
