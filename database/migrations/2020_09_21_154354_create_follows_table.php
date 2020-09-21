@@ -18,6 +18,7 @@ class CreateFollowsTable extends Migration
             $table->foreign('user_1')->references('id')->on('users');
             $table->unsignedBigInteger('user_2');
             $table->foreign('user_2')->references('id')->on('users');
+            $table->primary(['user_1', 'user_2']);
             $table->integer('status')->default(0);
             $table->timestamps();
         });
