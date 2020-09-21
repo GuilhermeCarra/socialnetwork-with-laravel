@@ -17,8 +17,7 @@ class CreateReactionsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('post_id')->constrained();
             $table->primary(['user_id', 'post_id']);
-            $table->boolean('is_like')->default(false);
-            $table->boolean('is_dislike')->default(false);
+            $table->enum('type', ['like', 'dislike']);
             $table->timestamps();
         });
     }
