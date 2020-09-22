@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(20)->create();
-        Follow::factory(10)->create();
+        if(!isset($GLOBALS['followsArray'])) $GLOBALS['followsArray']= array();
+
+        User::factory(200)->create();
+        Follow::factory(2500)->create();
     }
 }
