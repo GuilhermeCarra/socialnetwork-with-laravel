@@ -26,10 +26,7 @@ class FollowFactory extends Factory
         $users = User::pluck('id')->toArray();
         do {
             $user1 = $this->faker->randomElement($users);
-            unset($users[$user1]);
             $user2 = $this->faker->randomElement($users);
-            dump($user1);
-            dump($user2);
             $response1 = Follow::where('user_1',$user1)->where('user_2',$user2)->first();
             $response2 = Follow::where('user_1',$user2)->where('user_2',$user1)->first();
         } while (array_search([$user1,$user2],$GLOBALS['followsArray'])) ;
