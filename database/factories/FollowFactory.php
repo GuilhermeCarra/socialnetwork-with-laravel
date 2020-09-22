@@ -23,13 +23,14 @@ class FollowFactory extends Factory
      */
     public function definition()
     {
-        $users = User::pluck('id')->toArray();
         do {
-            $user1 = $this->faker->randomElement($users);
-            $user2 = $this->faker->randomElement($users);
+            $users = User::inRandomOrder()->limit(2)->get();
+            $user1 = $users[0];
+            $user2 = $users[1];
         } while (array_search([$user1,$user2],$GLOBALS['followsArray'])) ;
 
         array_push($GLOBALS['followsArray'], [$user1,$user2]);
+        array_push($GLOBALS['followsArray'], [$user2,$user1]);
 
         return [
             'user_1' => $user1,
