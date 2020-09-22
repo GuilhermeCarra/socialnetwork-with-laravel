@@ -23,9 +23,22 @@ class FollowFactory extends Factory
      */
     public function definition()
     {
+        $users = User::pluck('id')->toArray();
+        do {
+            $user1 = $this->faker->randomElement($users);
+            unset($users[$user1]);
+            $user2 = $this->faker->randomElement($users);
+            dump($user1);
+            dump($user2);
+            $response1 = Follow::where('user_1',$user1)->where('user_2',$user2)->first();
+            $response2 = Follow::where('user_1',$user2)->where('user_2',$user1)->first();
+        } while (array_search([$user1,$user2],$GLOBALS['followsArray'])) ;
+
+        array_push($GLOBALS['followsArray'], [$user1,$user2]);
+
         return [
-            'user_1' => $this->faker->unique()->numberBetween($min = 1, $max = 10),
-            'user_2' => $this->faker->unique()->numberBetween($min = 11, $max = 20),
+            'user_1' => $user1,
+            'user_2' => $user2,
             'status' => $this->faker->numberBetween(0,2)
         ];
     }
