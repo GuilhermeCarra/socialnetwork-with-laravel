@@ -16,3 +16,9 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/{username}', [App\Http\Controllers\UsersController::class, 'index']);
+    Route::post('/follow', [App\Http\Controllers\FollowsController::class, 'store'])->name('follow');
+    Route::post('/unfollow', [App\Http\Controllers\FollowsController::class, 'delete'])->name('unfollow');
+});
