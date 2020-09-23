@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use Illuminate\Http\Request;
 
 class FollowsController extends Controller
@@ -34,7 +35,11 @@ class FollowsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Follow::create($request->all())) {
+            echo "follow";
+        } else {
+            echo "error";
+        }
     }
 
     /**
@@ -77,8 +82,9 @@ class FollowsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $follow = Follow::where('follower', $request->follower)->where('followed', $request->followed)->first();
+        $follow->delete();
     }
 }
