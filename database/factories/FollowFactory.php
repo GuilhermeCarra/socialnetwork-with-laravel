@@ -25,17 +25,15 @@ class FollowFactory extends Factory
     {
         do {
             $users = User::inRandomOrder()->limit(2)->get();
-            $user1 = $users[0];
-            $user2 = $users[1];
+            $user1 = $users[0]->id;
+            $user2 = $users[1]->id;
         } while (array_search([$user1,$user2],$GLOBALS['followsArray'])) ;
 
         array_push($GLOBALS['followsArray'], [$user1,$user2]);
-        array_push($GLOBALS['followsArray'], [$user2,$user1]);
 
         return [
-            'user_1' => $user1,
-            'user_2' => $user2,
-            'status' => $this->faker->numberBetween(0,2)
+            'follower' => $user1,
+            'followed' => $user2,
         ];
     }
 }
