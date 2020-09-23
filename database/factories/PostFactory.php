@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Reaction;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -40,15 +41,15 @@ class PostFactory extends Factory
     }
 
     public function fixReactionsCount() {
-
         $posts = Post::pluck('id')->toArray();
 
         for ($i = 0; $i < count($posts); $i++) {
 
             $likes = Reaction::where('post_id',$posts[$i])->where('type','like')->count();
             $dislikes = Reaction::where('post_id',$posts[$i])->where('type','dislike')->count();
+            $commentsCount = Comment::where('post_id',$posts[$i])->count();
 
-            Post::where('id',$posts[$i])->update(['dislikes_count' => $dislikes, 'likes_count' => $likes]);
+            Post::where('id',$posts[$i])->update(['dislikes_count' => $dislikes, 'likes_count' => $likes, 'comments_count' => $commentsCount]);
         }
     }
 }
