@@ -10,10 +10,11 @@ class Follow extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = ['user_1','post_2'];
+    protected $primaryKey = ['follower','followed'];
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
-        'user_1', 'user_2'
+        'follower', 'followed'
     ];
 }
