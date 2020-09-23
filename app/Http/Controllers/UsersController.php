@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Follow;
 
 class UsersController extends Controller
 {
@@ -12,9 +14,19 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $username)
     {
-        //
+        if ($username == auth()->user()->username) {
+            $user = auth()->user();
+            $posts = Post::where('user_id', $user->id)->get();
+            return view('profile', compact('user', 'posts'));
+        } else {
+            $user = User::where('username', $username)->first();
+            $posts = Post::where('user_id', $user->id)->get();
+            $following = Follow::where('follower', auth()->user()->id)->count();
+            $following = 1;
+            return view('profile', compact('user', 'posts', 'following'));
+        }
     }
 
     /**
