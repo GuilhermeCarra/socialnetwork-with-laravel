@@ -8,6 +8,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             @include('includes.navbar')
         </nav>
+        @include('includes.search')
 
         <main class="py-4">
             @yield('content')
