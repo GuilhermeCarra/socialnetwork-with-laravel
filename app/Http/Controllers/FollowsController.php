@@ -84,7 +84,7 @@ class FollowsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $follow = Follow::where('follower', $request->follower)->where('followed', $request->followed)->first();
-        $follow->delete();
+        Follow::where('follower', $request->follower)->where('followed', $request->followed)->delete();
+        echo "deleted";
     }
 }
