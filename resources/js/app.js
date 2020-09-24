@@ -3,7 +3,7 @@ import 'remixicon/fonts/remixicon.css'
 
 var postsPage = 1;
 $(window).on('scroll', function(){
-    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    if($(window).scrollTop() + $(window).height() >= $(document).height() && postsPage) {
             postsPage++;
             loadPosts(postsPage);
         }
@@ -17,8 +17,10 @@ function loadPosts(page) {
             $('#load-message').removeClass('d-none');
         }
     }).done(function(data){
-        if(data.html == " "){
-            $('#load-message').text('No more posts to show');
+        console.log(data.html)
+        if(data.html.length == 0){
+            postsPage = false;
+            $('#load-message').text('No more posts to show').removeClass('d-none');
         } else {
             $('#load-message').addClass('d-none');
             $('#container-feed').append(data.html);
