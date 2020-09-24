@@ -1,12 +1,73 @@
-.search__container
-    padding: .4rem 0
-    display: inline-block
-    .checkbox
-        display: none
-    .search-label
-        display: inline
-        border-radius: 50%
-    .search-input
+.search
+    position: absolute
+    top: -50px
+    left: 0
+    .search-form, .search-result
         opacity: 0
         visibility: hidden
-        display: none
+    .search-result
+        height: 0%
+        width: 90%
+        border-radius: 3px
+        padding: 15px
+    .search-result.searching
+        height: 80%
+        max-width: 500px
+        margin-top: -20px
+        animation: opacity1-visibility1 2s forwards
+        transition: all .7s ease-in-out
+        box-shadow: 0 0.5rem 1rem rgba($gray-primary, .2)
+    &.all
+        top: 0
+        z-index: 99999
+        width: 100vw
+        height: 100vh
+        display: block
+        background: $dark-primary
+        animation: opacity1-visibility1 .3s forwards
+        transition: all .3s ease-in
+        .search-form
+            position: relative
+            display: block
+            animation: opacity1-visibility1 .3s .3s forwards
+            width: 100%
+            max-width: 500px
+            .search-input-container
+                position: relative
+                top: 0
+                left: 0
+                .search-close
+                    position: absolute
+                    top: -25px
+                    right: 10px
+                    display: inline-block
+                    width: 30px
+                    height: 30px
+                    font-size: 30px
+                    line-height: 35px
+                    vertical-align: middle
+                    cursor: pointer
+                .search-input
+                    width: 90%
+                    max-width: 500px
+                    margin: 0 auto
+                    background-color: rgba($blue-primary, .7)
+                    &:focus
+                        background-color: rgba($blue-primary, .7)
+    @at-root .search__button
+        display: inline-block
+        padding: .4rem 0
+        .search-label
+            display: inline-block
+            margin: 0
+            width: 25px
+            height: 25px
+            border-radius: 50%
+            cursor: pointer
+
+        
+
+@keyframes opacity1-visibility1
+    100%
+        opacity: 1
+        visibility: visible
