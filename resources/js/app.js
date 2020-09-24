@@ -1,5 +1,5 @@
 require('./bootstrap');
-//import 'remixicon/fonts/remixicon.css'
+import 'remixicon/fonts/remixicon.css'
 
 var postsPage = 1;
 $(window).on('scroll', function(){
