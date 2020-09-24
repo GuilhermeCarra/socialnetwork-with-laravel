@@ -1,7 +1,11 @@
-<div class="search__container">
-    <input type="checkbox" class="checkbox" id="check-search">
-    <label for="check-search" class="search-label bg-red-primary">
-        <i class="ri-search-line text-white"></i>
-    </label>
-    <input type="seach" class="search-input" id="search-input">
-</div>
+<div class="search d-flex flex-column justify-content-center align-items-center">
+    <div class="search-form">
+        <div class="form-group search-input-container">
+            <input type="search" name="search" id="search-input" class="search-input form-control text-white shadow" autocomplete="off">
+            <div class="search-close text-white">
+                <i class="ri-close-circle-line text-white"></i>
+            </div>
+        </div>
+    </div>
+    <div class="search-result" id="search-result"></div>
+ </div>
