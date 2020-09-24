@@ -5,8 +5,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="card shadow">
+                <div class="card-header bg-blue-primary text-white">
+                    <h4>{{ __('Login') }}<i class="ri-login-box-line text-white"></i></h4>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
