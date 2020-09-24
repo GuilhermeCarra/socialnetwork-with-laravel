@@ -10959,3 +10959,23 @@ a.text-dark:focus {
   font-size: 16px;
 }
 
+.search__container {
+  padding: 0.4rem 0;
+  display: inline-block;
+}
+
+.search__container .checkbox {
+  display: none;
+}
+
+.search__container .search-label {
+  display: inline;
+  border-radius: 50%;
+}
+
+.search__container .search-input {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
+}
+
