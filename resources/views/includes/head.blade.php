@@ -7,7 +7,7 @@
 <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
 <!-- Scripts -->
-<script src="{{ asset('assets/js/app.js') }}" defer></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
 
 <!-- Fonts -->
 <link rel="dns-prefetch" href="//fonts.gstatic.com">
