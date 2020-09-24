@@ -23,8 +23,7 @@ class UsersController extends Controller
         } else {
             $user = User::where('username', $username)->first();
             $posts = Post::where('user_id', $user->id)->get();
-            $following = Follow::where('follower', auth()->user()->id)->count();
-            $following = 1;
+            $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
             return view('profile', compact('user', 'posts', 'following'));
         }
     }
