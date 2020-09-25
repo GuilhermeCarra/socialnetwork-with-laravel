@@ -3,10 +3,8 @@
         init: function () {
             this.cacheDom()
             this.bindEvents()
-            console.log('in init')
         },
         cacheDom: function () {
-            console.log('in cacheDom')
             this.search = $('#search')
             this.form = $('#search-form')
             this.input = $('#search-input')
@@ -19,7 +17,6 @@
 
         },
         showSearch: function(){
-            console.log('in showSearch')
             $('body').addClass('hoverflow-hidden')
             this.search.addClass('show').css('top', window.top.scrollY)
             setTimeout(() => {this.input.focus()}, 500);
