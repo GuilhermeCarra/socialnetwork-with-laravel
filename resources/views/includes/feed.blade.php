@@ -28,7 +28,7 @@
                     @if($post->id == $comment->post_id)
                     <div class="container-fluid d-flex">
                         <img src="{{ $commentingUsers[$comment->user_id]->avatar }}" class="col-1 rounded-circle" alt="avatar">
-                        <a class="col-10" href="{{ $friends[$post->user_id]->username }}">{{ $commentingUsers[$comment->user_id]->name }}</a>
+                        <a class="col-10" href="{{ $commentingUsers[$comment->user_id]->username }}">{{ $commentingUsers[$comment->user_id]->name }}</a>
                     </div>
                     <p class="card-text">{{ $comment->content }}</p>
                     @endif
