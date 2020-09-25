@@ -7,7 +7,7 @@ document.onreadystatechange = ()=>{
 
 var postsPage = 1;
 $(window).on('scroll', function(){
-    if(Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height() && postsPage) {
+    if(Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height()  && postsPage) {
             postsPage++;
             loadPosts(postsPage);
         }
