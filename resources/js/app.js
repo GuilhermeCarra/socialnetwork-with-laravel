@@ -3,7 +3,7 @@ require('./bootstrap');
 
 var postsPage = 1;
 $(window).on('scroll', function(){
-    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    if(Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height()) {
             postsPage++;
             loadPosts(postsPage);
         }
