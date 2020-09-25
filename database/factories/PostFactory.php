@@ -27,10 +27,11 @@ class PostFactory extends Factory
     {
         $user = User::inRandomOrder()->limit(1)->get();
         $date = $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now');
+        $maxNbChars = rand(600,1000);
 
         return [
             'user_id' => $user[0],
-            'description' => $this->faker->realText($maxNbChars = 1000, $indexSize = 2),
+            'description' => $this->faker->realText($maxNbChars, $indexSize = 2),
             'image' => rand(0, 1) ? $this->faker->imageUrl($width = 640, $height = 480) : null,
             'likes_count' => $this->faker->numberBetween($min = 0, $max = 1500),
             'dislikes_count' => $this->faker->numberBetween($min = 0, $max = 500),
