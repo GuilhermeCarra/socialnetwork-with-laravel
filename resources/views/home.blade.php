@@ -7,13 +7,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-
                 <div class="container" id="container-feed">
                     @include('includes.feed')
                 </div>
-                <p id="load-message" class="d-none">Loading more posts</p>
             </div>
         </div>
     </div>
 </div>
+<div id="load-message" class="d-none text-center py-4"><p>Loading more posts...</p></div>
 @endsection
