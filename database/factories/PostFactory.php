@@ -27,7 +27,7 @@ class PostFactory extends Factory
     {
         $user = User::inRandomOrder()->limit(1)->get();
         $date = $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now');
-        $maxNbChars = rand(600,1000);
+        $maxNbChars = rand(400,1000);
 
         return [
             'user_id' => $user[0],
