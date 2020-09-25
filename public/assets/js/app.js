@@ -38006,7 +38006,7 @@ document.onreadystatechange = function () {
 
 var postsPage = 1;
 $(window).on('scroll', function () {
-  if (Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height()) {
+  if (Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height() && postsPage) {
     postsPage++;
     loadPosts(postsPage);
   }
@@ -38014,14 +38014,12 @@ $(window).on('scroll', function () {
 
 function loadPosts(page) {
   $.ajax({
-    url: 'home?page=' + page,
+    url: 'home?page=' + postsPage,
     type: 'GET',
     beforeSend: function beforeSend() {
       $('#load-message').removeClass('d-none');
     }
   }).done(function (data) {
-    console.log(data.html);
-
     if (data.html.length == 0) {
       postsPage = false;
       $('#load-message').text('No more posts to show').removeClass('d-none');
@@ -38145,8 +38143,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\socialnetwork-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\socialnetwork-laravel\resources\sass\app.sass */"./resources/sass/app.sass");
+__webpack_require__(/*! C:\Users\Ezequiel\Desktop\assembler\CLASES\62 - LARAVEL SOCIALNETWORK\socialnetwork-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Ezequiel\Desktop\assembler\CLASES\62 - LARAVEL SOCIALNETWORK\socialnetwork-laravel\resources\sass\app.sass */"./resources/sass/app.sass");
 
 
 /***/ })
