@@ -13,7 +13,7 @@ $(window).on('scroll', function(){
         }
 });
 
-function loadPosts(page) {
+function loadPosts(postsPage) {
     $.ajax({
         url: 'home?page=' + postsPage,
         type: 'GET',
