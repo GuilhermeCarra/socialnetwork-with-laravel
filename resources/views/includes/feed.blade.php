@@ -23,7 +23,6 @@
             <p class="card-text"><small class="text-muted">👍 {{ $post->likes_count }} 👎 {{ $post->dislikes_count }}</small></p>
 
             <!-- Comments -->
-            
                 @foreach ($comments as $comment)
                     @if($post->id == $comment->post_id)
                         <div class="container-fluid d-flex">
@@ -32,9 +31,10 @@
                         </div>
                         <p class="card-text">{{ $comment->content }}</p>
                         <p class="card-text"><small class="text-muted">{{ $comment->created_at }}</small></p>
+                        @if ($post->comments_count > 1)
+                            <footer class="footer border text-center comments-btn" id="post_{{$post->id}}">See more comments...</footer>
+                        @endif
                     @endif
                 @endforeach
-            
-
         </div>
 @endforeach

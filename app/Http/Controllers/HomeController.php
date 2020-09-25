@@ -33,7 +33,7 @@ class HomeController extends Controller
         $posts = Post::whereIn('user_id', $friendsID)->orderBy('created_at','desc')->paginate(3);
         $postsID = $posts->pluck('id')->toArray();
 
-        $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at','desc')->get();
+        $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at','desc')->get()->unique('post_id');
         $commentingUsersID = $comments->pluck('user_id')->toArray();
 
         $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
