@@ -26,11 +26,12 @@
             
                 @foreach ($comments as $comment)
                     @if($post->id == $comment->post_id)
-                    <div class="container-fluid d-flex">
-                        <img src="{{ $commentingUsers[$comment->user_id]->avatar }}" class="col-1 rounded-circle" alt="avatar">
-                        <a class="col-10" href="{{ $commentingUsers[$comment->user_id]->username }}">{{ $commentingUsers[$comment->user_id]->name }}</a>
-                    </div>
-                    <p class="card-text">{{ $comment->content }}</p>
+                        <div class="container-fluid d-flex">
+                            <img src="{{ $commentingUsers[$comment->user_id]->avatar }}" class="col-1 rounded-circle" alt="avatar">
+                            <a class="col-10" href="{{ $commentingUsers[$comment->user_id]->username }}">{{ $commentingUsers[$comment->user_id]->name }}</a>
+                        </div>
+                        <p class="card-text">{{ $comment->content }}</p>
+                        <p class="card-text"><small class="text-muted">{{ $comment->created_at }}</small></p>
                     @endif
                 @endforeach
             
