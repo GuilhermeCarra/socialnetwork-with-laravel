@@ -38091,10 +38091,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     init: function init() {
       this.cacheDom();
       this.bindEvents();
-      console.log('in init');
     },
     cacheDom: function cacheDom() {
-      console.log('in cacheDom');
       this.search = $('#search');
       this.form = $('#search-form');
       this.input = $('#search-input');
@@ -38108,7 +38106,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     showSearch: function showSearch() {
       var _this = this;
 
-      console.log('in showSearch');
       $('body').addClass('hoverflow-hidden');
       this.search.addClass('show').css('top', window.top.scrollY);
       setTimeout(function () {
