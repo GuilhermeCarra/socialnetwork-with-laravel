@@ -10899,6 +10899,13 @@ a.text-dark:focus {
   }
 }
 
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 [class*=ri-] {
   font-size: inherit;
   line-height: inherit;
@@ -10957,5 +10964,113 @@ a.text-dark:focus {
 
 .navbar .container {
   font-size: 16px;
+}
+
+.search {
+  position: absolute;
+  top: -50px;
+  left: 0;
+}
+
+.search .search-form,
+.search .search-result {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.search .search-result {
+  height: 0%;
+  width: 90%;
+  border-radius: 3px;
+  padding: 15px;
+}
+
+.search .search-result.searching {
+  height: 80%;
+  max-width: 500px;
+  margin-top: -20px;
+  -webkit-animation: opacity1-visibility1 2s forwards;
+          animation: opacity1-visibility1 2s forwards;
+  transition: all 0.7s ease-in-out;
+  box-shadow: 0 0.5rem 1rem rgba(164, 184, 190, 0.2);
+}
+
+.search.show {
+  top: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: #3f4d51;
+  -webkit-animation: opacity1-visibility1 0.3s forwards;
+          animation: opacity1-visibility1 0.3s forwards;
+  transition: all 0.3s ease-in;
+}
+
+.search.show .search-form {
+  position: relative;
+  display: block;
+  -webkit-animation: opacity1-visibility1 0.3s 0.3s forwards;
+          animation: opacity1-visibility1 0.3s 0.3s forwards;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search.show .search-form .search-input-container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.search.show .search-form .search-input-container .search-close {
+  position: absolute;
+  top: -25px;
+  right: 10px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 35px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.search.show .search-form .search-input-container .search-input {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: rgba(64, 164, 196, 0.7);
+}
+
+.search.show .search-form .search-input-container .search-input:focus {
+  background-color: rgba(64, 164, 196, 0.7);
+}
+
+.search__button {
+  display: inline-block;
+  padding: 0.4rem 0;
+}
+
+.search__button .search-label {
+  display: inline-block;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@-webkit-keyframes opacity1-visibility1 {
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes opacity1-visibility1 {
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
