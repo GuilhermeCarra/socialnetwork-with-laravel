@@ -37996,9 +37996,13 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var remixicon_fonts_remixicon_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! remixicon/fonts/remixicon.css */ "./node_modules/remixicon/fonts/remixicon.css");
 /* harmony import */ var remixicon_fonts_remixicon_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(remixicon_fonts_remixicon_css__WEBPACK_IMPORTED_MODULE_0__);
+
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-
+document.onreadystatechange = function () {
+  __webpack_require__(/*! ./customjs/search */ "./resources/js/customjs/search.js");
+};
 
 /***/ }),
 
@@ -38044,6 +38048,57 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/customjs/search.js":
+/*!*****************************************!*\
+  !*** ./resources/js/customjs/search.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function () {
+  var search = {
+    init: function init() {
+      this.cacheDom();
+      this.bindEvents();
+      console.log('in init');
+    },
+    cacheDom: function cacheDom() {
+      console.log('in cacheDom');
+      this.search = $('#search');
+      this.form = $('#search-form');
+      this.input = $('#search-input');
+      this.button = $('#search-button');
+    },
+    bindEvents: function bindEvents() {
+      this.button.on('click', this.showSearch.bind(this));
+      this.input.on('input', this.showResults);
+      this.form.on('click', '.search-close', this.closeSearch.bind(this));
+    },
+    showSearch: function showSearch() {
+      var _this = this;
+
+      console.log('in showSearch');
+      $('body').addClass('hoverflow-hidden');
+      this.search.addClass('show').css('top', window.top.scrollY);
+      setTimeout(function () {
+        _this.input.focus();
+      }, 500);
+    },
+    showResults: function showResults() {
+      $('#search-result').addClass('searching').fadeIn();
+    },
+    closeSearch: function closeSearch() {
+      this.input.val("");
+      $('#search-result').removeClass('searching');
+      $('body').removeClass('overflow-hidden');
+      this.search.removeClass('show');
+    }
+  };
+  search.init();
+})();
 
 /***/ }),
 
