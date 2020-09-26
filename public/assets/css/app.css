@@ -10962,12 +10962,25 @@ body {
   background-color: #d75548;
 }
 
+.bg-light-gray {
+  background-color: rgba(63, 77, 81, 0.1);
+}
+
+.bg-light-gray:hover {
+  background-color: rgba(63, 77, 81, 0.2);
+}
+
+.line-clamp,
 .line-clamp-2,
 .line-clamp-3 {
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.line-clamp-2 {
+  -webkit-line-clamp: 2;
 }
 
 .line-clamp-3 {
@@ -10976,6 +10989,13 @@ body {
 
 .navbar .container {
   font-size: 16px;
+}
+
+.navbar .container .avatar {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
 }
 
 .search {
@@ -11060,7 +11080,7 @@ body {
 
 .search__button {
   display: inline-block;
-  padding: 0.4rem 0;
+  padding: 9px 0;
 }
 
 .search__button .search-label {
@@ -11110,18 +11130,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.card.post .card-header .post__header__user .avatar {
-  width: 30px;
-  height: 30px;
-}
-
-@media all and (min-width: 576px) {
-  .card.post .card-header .post__header__user .avatar {
-    width: 45px;
-    height: 45px;
-  }
-}
-
 .card.post .card-header .post__header__menu .post__header__menu--btn {
   padding: 5px;
   font-size: 18px;
@@ -11136,11 +11144,6 @@ body {
   padding-bottom: 1rem;
 }
 
-.card.post .card-body .post__body__content .created {
-  padding: 5px 0;
-  margin: 0 0 10px;
-}
-
 .card.post .card-body .post__body__image {
   margin: 0 -1.25rem;
 }
@@ -11148,5 +11151,43 @@ body {
 .card.post .card-body .post__body__reactions {
   margin: 0.5rem 0;
   font-size: clamp(15px, 2vw, 18px);
+}
+
+.card.post .card-footer {
+  padding: 0.25rem 0.5rem;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+}
+
+@media all and (min-width: 576px) {
+  .avatar {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+.comment.preview {
+  margin: 5px;
+}
+
+.comment.preview .comment__avatar__box {
+  width: 45px;
+  height: 100%;
+  margin-right: 10px;
+}
+
+.comment.preview .form-control {
+  height: 30px;
+  padding: 0.15rem 0.75rem;
+}
+
+.comment.preview .btn-primary {
+  height: 30px;
+  padding: 0 15px;
+  line-height: 30px;
+  vertical-align: middle;
 }
 
