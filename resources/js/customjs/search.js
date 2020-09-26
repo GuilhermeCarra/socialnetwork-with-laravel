@@ -17,7 +17,7 @@
 
         },
         showSearch: function(){
-            $('body').addClass('hoverflow-hidden')
+            $('body').addClass('stop-scroll')
             this.search.addClass('show').css('top', window.top.scrollY)
             setTimeout(() => {this.input.focus()}, 500);
         },
@@ -27,7 +27,7 @@
         closeSearch: function(){
             this.input.val("")
             $('#search-result').removeClass('searching')
-            $('body').removeClass('overflow-hidden')
+            $('body').removeClass('stop-scroll')
             this.search.removeClass('show')
 
         }
