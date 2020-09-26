@@ -1,5 +1,5 @@
 @foreach ($comments as $comment)
-    <div class="comment preview my-2">
+    <div class="comment my-2">
         <div class="d-flex flex-start flex-nowrap align-items-center">
             <div class="comment__avatar__box">
                 <a class="" href="{{ $users[$comment->user_id]->username }}">
@@ -13,7 +13,7 @@
                     </a>
                     <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
                 </div>
-                <div class="line-clamp">
+                <div class="comment__content--box">
                     <p class="card-text">{{ $comment->content }}</p>
                 </div>
             </div>
