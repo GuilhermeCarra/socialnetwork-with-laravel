@@ -53,7 +53,7 @@
         <!-- Comments -->
         <div class="comment preview my-2">
             <div class="d-flex flex-start flex-nowrap align-items-center">
-                <div class="comment__avatar__box">
+                <div class="comment__avatar__box mb-auto">
                     <a class="" href="{{ auth()->user()->username }}">
                         <img src="{{ auth()->user()->avatar }}" class="rounded-circle avatar" alt="avatar">
                     </a>
@@ -67,8 +67,8 @@
                     </div>
                     <div class="comment_create__add">
                         <div class="form-group d-flex flex-nowrap justify-content-between">
-                            <textarea class="form-control" name="newcomment" id="coment" cols="30" rows="1"></textarea>
-                            <button class="btn btn-primary">Add</button>
+                            <textarea class="form-control comment-textarea" name="newcomment" id="coment" cols="30" rows="1"></textarea>
+                            <button class="btn btn-primary mt-auto">Add</button>
                         </div>
                     </div>
                 </div>

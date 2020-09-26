@@ -7,6 +7,7 @@ document.onreadystatechange = () => {
 
 $( document ).ready(function() {
     setLoadCommentsBtn();
+    setTextareaHeightAuto()
 });
 
 
@@ -58,4 +59,15 @@ function loadMoreComments(event) {
         $(button).before(data);
         $(button).text('Close comments...');
     })
+}
+
+function setTextareaHeightAuto(){
+    $('.comment-textarea').each(function () {
+        this.setAttribute('style', 'overflow-y:auto;');
+    }).on('input', function () {
+        if(this.scrollHeight <= 200){
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight + 2) + 'px';
+        }
+    });
 }
