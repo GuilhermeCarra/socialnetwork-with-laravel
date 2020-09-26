@@ -10987,6 +10987,10 @@ body {
   -webkit-line-clamp: 3;
 }
 
+.stop-scroll {
+  overflow: hidden;
+}
+
 .navbar .container {
   font-size: 16px;
 }
