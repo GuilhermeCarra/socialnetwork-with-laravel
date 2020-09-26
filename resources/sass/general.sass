@@ -35,11 +35,18 @@ body
     background-color: $gray-primary
 .bg-red-primary
     background-color: $red-primary
+.bg-light-gray
+    background-color: rgba($dark-primary, .1)
+    &:hover
+        background-color: rgba($dark-primary, .2)
 
-.line-clamp-2, .line-clamp-3
+.line-clamp, .line-clamp-2, .line-clamp-3
     display: -webkit-box
-    -webkit-line-clamp: 2
+    -webkit-line-clamp: 1
     -webkit-box-orient: vertical  
     overflow: hidden
+    @at-root .line-clamp-2
+        -webkit-line-clamp: 2
     @at-root .line-clamp-3
         -webkit-line-clamp: 3
+
