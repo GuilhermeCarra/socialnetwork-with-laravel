@@ -95,9 +95,11 @@
                             </div>
                         </div>
                     </div>
+                    @if ($post->comments_count > 1)
                     <div class="mt-4 mb-2 p-0 btn text-center w-100 bg-light-gray pointer comments-btn" id="post_{{$post->id}}">
                         See more comments...
                     </div>
+                    @endif
                 </div>
             @endif
         @endforeach
