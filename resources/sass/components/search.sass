@@ -1,24 +1,16 @@
 .search
-    position: absolute
-    top: -50px
+    position: fixed
+    top: 0
     left: 0
     .search-form, .search-result
         opacity: 0
         visibility: hidden
     .search-result
-        height: 0%
+        height: 0
         width: 90%
         border-radius: 3px
         padding: 15px
-    .search-result.searching
-        height: 80%
-        max-width: 500px
-        margin-top: -20px
-        animation: opacity1-visibility1 2s forwards
-        transition: all .7s ease-in-out
-        box-shadow: 0 0.5rem 1rem rgba($gray-primary, .2)
     &.show
-        top: 0
         z-index: 99999
         width: 100vw
         height: 100vh
@@ -54,6 +46,13 @@
                     background-color: rgba($blue-primary, .7)
                     &:focus
                         background-color: rgba($blue-primary, .7)
+        .search-result.searching
+            height: 80%
+            max-width: 500px
+            margin-top: -20px
+            animation: opacity1-visibility1 2s forwards
+            transition: all .7s ease-in-out
+            box-shadow: 0 0.5rem 1rem rgba($gray-primary, .2)
     @at-root .search__button
         display: inline-block
         padding: 9px 0
