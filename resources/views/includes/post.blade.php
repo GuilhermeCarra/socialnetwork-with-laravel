@@ -95,7 +95,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-4 mb-2 p-0 btn text-center w-100 bg-disabled pointer" id="post_{{$post->id}}">
+                    <div class="mt-4 mb-2 p-0 btn text-center w-100 bg-light-gray pointer" id="post_{{$post->id}}">
                         See more comments...
                     </div>
                 </div>
