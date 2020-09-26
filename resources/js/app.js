@@ -40,7 +40,6 @@ function loadPosts(postsPage) {
 }
 
 function setLoadCommentsBtn() {
-    console.log('hi')
     $('.comments-btn').each(function () {
         $(this).on('click', loadMoreComments);
         $(this).removeClass('.comments-btn');
