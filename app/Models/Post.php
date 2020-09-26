@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
-   protected $fillable = [
-      'description', 'image', 'likes_count', 'dislikes_count', 'comments_count'
-  ];
+    protected $fillable = [
+        'description', 'image', 'likes_count', 'dislikes_count', 'comments_count'
+    ];
 
-//   public function comments()
-//     {
-//         return $this->hasMany('App\Models\Comment');
-//     }
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 
-//   public function user()
-//     {
-//         return $this->hasOne('App\Models\User', 'id', 'user_id');
-//     }
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }
