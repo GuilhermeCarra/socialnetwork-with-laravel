@@ -20,9 +20,9 @@ class UsersController extends Controller
         if ($username == auth()->user()->username) {
             $user = auth()->user();
 
-            $posts = Post::where('user_id', $user->id)->get();
+            $posts = Post::where('user_id', $user->id)->orderBy('created_at','desc')->get();
             $postsID = $posts->pluck('id')->toArray();
-            
+
             $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
             $commentingUsersID = $comments->pluck('user_id')->toArray();
             
