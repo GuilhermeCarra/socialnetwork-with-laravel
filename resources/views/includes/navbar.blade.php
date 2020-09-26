@@ -30,7 +30,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <i class="ri-user-3-{{Request::is(auth()->user()->username) ? 'fill' : 'line'}}"></i>{{ Auth::user()->username }}
+                    <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->username }}'s avatar">
+                    {{ Auth::user()->username }}
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
