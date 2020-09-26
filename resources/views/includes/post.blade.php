@@ -36,15 +36,15 @@
             <div class="post__body__reactions d-flex flex-start flex-nowrap align-items-center">
                 <p class="card-text mr-3 mb-0">
                     <i class="ri-thumb-up-line"></i>
-                    <span class="text-muted"> {{ $post->likes_count }}</span> 
+                    <small class="text-muted"> {{ $post->likes_count }}</small> 
                 </p>
                 <p class="mr-3 mb-0">
                     <i class="ri-thumb-down-line"></i>
-                    <span>{{ $post->dislikes_count }}</span>
+                    <small class="text-muted">{{ $post->dislikes_count }}</small>
                 </p>
                 <p class="mr-3 mb-0">
-                    <i class="ri-chat-3-line ri-10x"></i>
-                    <span>{{ $post->comments_count }}</span>
+                    <i class="ri-chat-3-line"></i>
+                    <small class="text-muted">{{ $post->comments_count }}</small>
                 </p>
             </div>
         </div>
