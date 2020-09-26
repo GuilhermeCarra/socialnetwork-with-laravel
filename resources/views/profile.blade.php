@@ -24,29 +24,7 @@
                 </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                    {{$user->id}}
-                    @if($posts ?? '')
-                    @foreach($posts as $post)
-                    @if($post->image)
-                    <img src="{{$post->image}}" alt="">
-                    @endif
-                    <p>{{$post->description}}</p>
-                    <p>{{$post->likes_count}}</p>
-                    <p>{{$post->dislikes_count}}</p>
-                    <p>{{$post->comments_count}}</p>
-                    @endforeach
-                    @else
-                    <p>No posts</p>
-                    @endif
-                    <br>
-                    
+                    @include('includes.feed')
                 </div>
             </div>
         </div>
