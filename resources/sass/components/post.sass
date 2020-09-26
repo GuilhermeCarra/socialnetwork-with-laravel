@@ -12,12 +12,6 @@
             white-space: nowrap
             overflow: hidden
             text-overflow: ellipsis
-            .avatar
-                width: 30px
-                height: 30px
-                @media all and ( min-width: 576px )
-                    width: 45px
-                    height: 45px
         .post__header__menu
             .post__header__menu--btn
                 padding: 5px
@@ -27,13 +21,17 @@
         padding: 1rem 1.25rem 0
         .post__body__content
             padding-bottom: 1rem
-            .created
-                padding: 5px 0
-                margin: 0 0 10px
         .post__body__image
             margin: 0 -1.25rem
         .post__body__reactions
             margin: .5rem 0
             font-size: clamp(15px, 2vw, 18px)
+    .card-footer
+        padding: 0.25rem 0.5rem
 
-
+.avatar
+    width: 30px
+    height: 30px
+    @media all and ( min-width: 576px )
+        width: 45px
+        height: 45px
