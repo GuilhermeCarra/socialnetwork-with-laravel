@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
+use App\Models\Comment;
 
 class UsersController extends Controller
 {
@@ -18,13 +19,28 @@ class UsersController extends Controller
     {
         if ($username == auth()->user()->username) {
             $user = auth()->user();
+
             $posts = Post::where('user_id', $user->id)->get();
-            return view('profile', compact('user', 'posts'));
+            $postsID = $posts->pluck('id')->toArray();
+            
+            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
+            $commentingUsersID = $comments->pluck('user_id')->toArray();
+            
+            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
+            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers'));
         } else {
             $user = User::where('username', $username)->firstOrFail();
+
             $posts = Post::where('user_id', $user->id)->get();
+            $postsID = $posts->pluck('id')->toArray();
+
+            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
+            $commentingUsersID = $comments->pluck('user_id')->toArray();
+            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
+
             $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
-            return view('profile', compact('user', 'posts', 'following'));
+
+            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers', 'following'));
         }
     }
 
