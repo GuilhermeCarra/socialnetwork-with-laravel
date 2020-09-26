@@ -12,4 +12,14 @@ class Post extends Model
    protected $fillable = [
       'description', 'image', 'likes_count', 'dislikes_count', 'comments_count'
   ];
+
+//   public function comments()
+//     {
+//         return $this->hasMany('App\Models\Comment');
+//     }
+
+//   public function user()
+//     {
+//         return $this->hasOne('App\Models\User', 'id', 'user_id');
+//     }
 }
