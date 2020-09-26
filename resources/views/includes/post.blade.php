@@ -5,7 +5,7 @@
         $user = $friends[$post->user_id] 
     @endphp
 @endif
-    <div class="card post">
+<div class="card post" data-post="{{$post->id}}">
         <div class="card-header">
             <div class="post__header d-flex flex-nowrap justify-content-between align-items-center">
                 <div class="post__header__user">
@@ -90,7 +90,7 @@
                                 </a>
                                 <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
                             </div>
-                            <div class="line-clamp">
+                            <div class="comment__content--box line-clamp">
                                 <p class="card-text">{{ $comment->content }}</p>
                             </div>
                         </div>
