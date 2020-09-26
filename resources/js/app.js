@@ -5,8 +5,9 @@ document.onreadystatechange = () => {
     require('./customjs/search');
 }
 
-
-setLoadCommentsBtn();
+$( document ).ready(function() {
+    setLoadCommentsBtn();
+});
 
 
 var postsPage = 1;
@@ -39,6 +40,7 @@ function loadPosts(postsPage) {
 }
 
 function setLoadCommentsBtn() {
+    console.log('hi')
     $('.comments-btn').each(function () {
         $(this).on('click', loadMoreComments);
         $(this).removeClass('.comments-btn');
