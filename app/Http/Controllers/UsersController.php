@@ -31,14 +31,15 @@ class UsersController extends Controller
         } else {
             $user = User::getUserByUsername($username);
             $posts = Post::getPostByUserId($user->id);;
-            $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
+            $following = Follow::isFollowed($user->id);
+            $followed = Follow::isFollower($user->id);
 
             if($request->ajax()) {
                 $view = view('includes.feed',compact(['posts']))->render();
                 return response()->json(['html'=>$view]);
             }
 
-            return view('profile', compact('user', 'posts', 'following'));
+            return view('profile', compact('user', 'posts', 'following', 'followed'));
         }
     }
 
