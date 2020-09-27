@@ -6,7 +6,7 @@
         <form action="" id="newpost-form">
             <div class="form-group">
                 <label for="">Text</label>
-                <textarea class="form-control shadow" name="post_content" id="post_content" cols="30" rows="10"></textarea>
+                <textarea class="form-control shadow" name="post_content" id="textarea-newpost-content" cols="30" rows="10"></textarea>
             </div>
             <div class="form-group">
                 <label for="post_image"></label>
