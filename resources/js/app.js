@@ -3,6 +3,7 @@ require('./bootstrap');
 
 document.onreadystatechange = () => {
     require('./customjs/search');
+    require('./customjs/friends');
 }
 
 $(document).ready(function () {
