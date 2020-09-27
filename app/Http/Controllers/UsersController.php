@@ -19,18 +19,18 @@ class UsersController extends Controller
     {
         if ($username == auth()->user()->username) {
             $user = auth()->user();
-            $posts = Post::where('user_id', $user->id)->orderBy('created_at','desc')->paginate(5);
+            $posts = Post::getPostByUserId($user->id);
 
             if($request->ajax()) {
                 $view = view('includes.feed',compact(['posts']))->render();
                 return response()->json(['html'=>$view]);
             }
-            
+
             return view('profile', compact('user', 'posts'));
 
         } else {
-            $user = User::where('username', $username)->firstOrFail();
-            $posts = Post::where('user_id', $user->id)->get()->paginate(5);
+            $user = User::getUserByUsername($username);
+            $posts = Post::getPostByUserId($user->id);;
             $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
 
             if($request->ajax()) {
