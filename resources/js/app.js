@@ -5,25 +5,25 @@ document.onreadystatechange = () => {
     require('./customjs/search');
 }
 
-$( document ).ready(function() {
+$(document).ready(function () {
     setLoadCommentsBtn();
     setTextareaHeightAuto()
 });
-
 
 var postsPage = 1;
 $(window).on('scroll', function () {
     if (Math.ceil($(window).scrollTop()) + Math.ceil($(window).height()) >= $(document).height() && postsPage) {
         if (postsPage) {
-            postsPage++;
+            postsPage++
             loadPosts(postsPage);
         }
     }
 });
 
-function loadPosts(postsPage) {
+function loadPosts() {
+    let url = window.location.pathname + '?page='
     $.ajax({
-        url: 'home?page=' + postsPage,
+        url: url + postsPage,
         type: 'GET',
         beforeSend: function () {
             $('#load-message').removeClass('d-none');
@@ -42,6 +42,7 @@ function loadPosts(postsPage) {
 
 function setLoadCommentsBtn() {
     $('.comments-btn').each(function () {
+        $(this).off()
         $(this).on('click', loadMoreComments);
         $(this).removeClass('.comments-btn');
     });
@@ -61,11 +62,11 @@ function loadMoreComments(event) {
     })
 }
 
-function setTextareaHeightAuto(){
+function setTextareaHeightAuto() {
     $('.comment-textarea').each(function () {
         this.setAttribute('style', 'overflow-y:auto;');
     }).on('input', function () {
-        if(this.scrollHeight <= 200){
+        if (this.scrollHeight <= 200) {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight + 2) + 'px';
         }
