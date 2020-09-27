@@ -44,7 +44,7 @@ function setLoadCommentsBtn() {
     $('.comments-btn').each(function () {
         $(this).off()
         $(this).on('click', loadMoreComments);
-        $(this).removeClass('.comments-btn');
+        $(this).removeClass('comments-btn');
     });
 }
 
@@ -56,6 +56,7 @@ function loadMoreComments(event) {
         url: 'comments/post/' + id,
         type: 'GET',
     }).done(function (data) {
+        console.log(data);
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
         $(button).before(data);
         $(button).text('Close comments...');
