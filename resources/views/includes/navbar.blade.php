@@ -30,7 +30,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    <img class="avatar" src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->username }}'s avatar">
+                    <img class="avatar" src="{{ Auth::user()->avatar ?? asset('assets/img/ghost-line.svg') }}" alt="{{ Auth::user()->username }}'s avatar">
                     {{ Auth::user()->username }}
                 </a>
 
