@@ -2,6 +2,7 @@ import 'remixicon/fonts/remixicon.css'
 require('./bootstrap');
 
 document.onreadystatechange = () => {
+    require('./customjs/menu');
     require('./customjs/search');
     require('./customjs/friends');
     require('./customjs/newpost');
