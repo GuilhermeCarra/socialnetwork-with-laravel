@@ -19,28 +19,26 @@ class UsersController extends Controller
     {
         if ($username == auth()->user()->username) {
             $user = auth()->user();
+            $posts = Post::where('user_id', $user->id)->orderBy('created_at','desc')->paginate(5);
 
-            $posts = Post::where('user_id', $user->id)->orderBy('created_at','desc')->get();
-            $postsID = $posts->pluck('id')->toArray();
-
-            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
-            $commentingUsersID = $comments->pluck('user_id')->toArray();
+            if($request->ajax()) {
+                $view = view('includes.feed',compact(['posts']))->render();
+                return response()->json(['html'=>$view]);
+            }
             
-            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
-            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers'));
+            return view('profile', compact('user', 'posts'));
+
         } else {
             $user = User::where('username', $username)->firstOrFail();
-
-            $posts = Post::where('user_id', $user->id)->get();
-            $postsID = $posts->pluck('id')->toArray();
-
-            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
-            $commentingUsersID = $comments->pluck('user_id')->toArray();
-            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
-
+            $posts = Post::where('user_id', $user->id)->get()->paginate(5);
             $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
 
-            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers', 'following'));
+            if($request->ajax()) {
+                $view = view('includes.feed',compact(['posts']))->render();
+                return response()->json(['html'=>$view]);
+            }
+
+            return view('profile', compact('user', 'posts', 'following'));
         }
     }
 
