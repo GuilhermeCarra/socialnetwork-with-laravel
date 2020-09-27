@@ -9,6 +9,7 @@
             @include('includes.navbar')
         </nav>
         @if(auth()->user())
+            @include('includes/menu')
             @include('includes.search')
             @include('includes.friends')
         @endif
