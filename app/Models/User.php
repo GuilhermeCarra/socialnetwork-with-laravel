@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get user by username.
+     * 
+     * @param string $username
+     * @return \App\Models\User
+     */
+    protected static function getUserByUsername(string $username){
+        return self::where('username', $username)->firstOrFail();
+    } 
 }
