@@ -12,6 +12,7 @@
             @include('includes/menu')
             @include('includes.search')
             @include('includes.friends')
+            @include('includes.newpost')
         @endif
 
         <main class="py-4">
