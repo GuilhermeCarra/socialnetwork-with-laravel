@@ -11161,6 +11161,10 @@ body {
   padding: 0.25rem 0.5rem;
 }
 
+.card.post .card-footer .comment__create .btn {
+  font-size: 18px;
+}
+
 .avatar {
   width: 30px;
   height: 30px;
