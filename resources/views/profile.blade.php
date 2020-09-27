@@ -23,7 +23,7 @@
                     @endif
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" id="container-feed">
                     @include('includes.feed')
                 </div>
             </div>
