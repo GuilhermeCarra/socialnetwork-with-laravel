@@ -4,6 +4,7 @@ require('./bootstrap');
 document.onreadystatechange = () => {
     require('./customjs/search');
     require('./customjs/friends');
+    require('./customjs/newpost');
 }
 
 $(document).ready(function () {
