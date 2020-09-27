@@ -16,9 +16,10 @@
             this.form.on('click', '.search-close', this.closeSearch.bind(this))
         },
         showSearch: function(){
+            $('#friends.show, #newform.show').removeClass('show')
             $('body').addClass('stop-scroll')
             this.search.addClass('show')
-            setTimeout(() => {this.input.focus()}, 500);
+            setTimeout(() => {this.input.trigger('focus')}, 500);
         },
         showResults: function(){
             $('#search-result').addClass('searching').fadeIn()
