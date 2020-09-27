@@ -55,10 +55,9 @@ function loadMoreComments(event) {
         url: 'comments/post/' + id,
         type: 'GET',
     }).done(function (data) {
-        console.log(data);
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
         $(button).before(data);
-        $(button).text('Close comments...');
+        $(button).text('Close comments...').unbind().on('click',closeComments);
     })
 }
 
@@ -71,4 +70,9 @@ function setTextareaHeightAuto(){
             this.style.height = (this.scrollHeight + 2) + 'px';
         }
     });
+}
+
+function closeComments() {
+    $(event.target).siblings('.comment').remove();
+    $(event.target).text('See more comments...').on('click', loadMoreComments);
 }
