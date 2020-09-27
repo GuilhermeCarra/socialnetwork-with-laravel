@@ -60,7 +60,7 @@
                         </a>
                         <p class="p-0 m-0"><small class="text-muted">Add a comment!</small></p>
                     </div>
-                    <div class="comment_create__add">
+                    <div class="comment_create">
                         <div class="form-group d-flex flex-nowrap justify-content-between">
                             <textarea class="form-control comment-textarea" name="newcomment" id="coment" cols="30" rows="1"></textarea>
                             <button class="btn btn-primary mt-auto p-0 display-4"><i class="ri-add-circle-line text-white"></i></button>
