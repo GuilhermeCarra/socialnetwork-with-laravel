@@ -1,18 +1,17 @@
 @extends('layouts.app')
 @section('title', Auth::user()->username)
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <img width="200px" height="200px" src="{{$user->avatar}}" alt="">
+                    <img src="{{$user->avatar ?? asset('assets/img/ghost-line.svg')}}" alt="">
                     <p><b>{{$user->name}}</b></p>
                     <p>{{$user->description}}</p>
                     @if($user->id != auth()->user()->id)
-                        <form method="POST" action="{{$following ? route('unfollow') : route('follow')}}">
-                            @if($user->id != auth()->user()->id && $following) 
+                    <form method="POST" action="{{$following ? route('unfollow') : route('follow')}}">
+                        @if($user->id != auth()->user()->id && $following) 
                                 @method('DELETE')
                             @endif
                             @csrf
@@ -23,7 +22,7 @@
                     @endif
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" id="container-feed">
                     @include('includes.feed')
                 </div>
             </div>

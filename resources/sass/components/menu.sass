@@ -1,0 +1,64 @@
+.menu
+    position: fixed
+    top: calc(100% - 70px)
+    left: calc(100% - 45px)
+    transform: translate(-50%, -50%)
+    z-index: 1040
+    transition: top .3s ease-in-out
+    @media all and ( min-width: 578px )
+        top: -10px
+        left: 50%
+        &:hover
+            top: 10px
+    .menu-item
+        position: absolute
+        top: 0
+        left: 0
+        display: inline-block
+        cursor: pointer
+        background-color: $blue-primary
+        width: 45px
+        height: 45px
+        border-radius: 50%
+        overflow: hidden
+        transition: all .5s ease-in-out
+        [class*="ri"]
+            font-size: 1.5rem
+            line-height: 35px
+            color: $white
+        &:first-child
+            line-height: 40px
+            z-index: 1
+    &.open
+        @media all and ( min-width: 578px )
+            top: 15px
+        .menu-item
+            width: 35px
+            height: 35px
+            transform: translateX(-50%)
+            &:nth-child(1)
+                width: 45px
+                height: 45px
+                line-height: 40px
+                transform: rotate(360deg) scale(1.2)
+            &:nth-child(2)
+                left: -35px
+                top: 15px
+            &:nth-child(3)
+                top: -35px
+                left: -25px
+            &:nth-child(4)
+                top: -55px
+                left: 25px
+            @media all and ( min-width: 578px )
+                &:nth-child(1)
+                    transform: rotate(360deg) scale(1.2)
+                &:nth-child(2)
+                    left: -30px
+                    top: 40px
+                &:nth-child(3)
+                    top: calc(100% + 50px)
+                    left: 23px
+                &:nth-child(4)
+                    left: calc( 100% + 35px )
+                    top: 40px

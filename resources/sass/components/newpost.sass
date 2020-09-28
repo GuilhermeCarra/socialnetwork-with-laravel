@@ -1,0 +1,23 @@
+@import 'components/extends/search-friends'
+
+.newpost
+    position: fixed
+    top: 0
+    right: -110%
+    height: 100vh
+    width: 100%
+    max-width: 500px
+    padding: 15px
+    transition: all .3s ease-in
+    z-index: 1030
+    .newpost-form
+        opacity: 1
+        visibility: visible
+    &.show
+        right: 0
+        @extend %search-friends-show
+        .newpost-form
+            @extend %search-friends-form
+            max-width: 500px
+            .newpost-close
+                @extend %search-friends-close

@@ -71,9 +71,9 @@ class CommentsController extends Controller
     public function loadPostComments(Request $request, $id)
     {
         $comments = Comment::where('post_id',$id)->orderBy('created_at','desc')->get()->skip(1);
-        $users = User::whereIn('id', $comments->pluck('user_id')->toArray())->get()->keyBy('id');
+        // $users = User::whereIn('id', $comments->pluck('user_id')->toArray())->get()->keyBy('id');
         if($request->ajax()) {
-            $view = view('includes.comments',compact(['comments','users']))->render();
+            $view = view('includes.comments',compact(['comments']))->render();
             return $view;
         }
     }

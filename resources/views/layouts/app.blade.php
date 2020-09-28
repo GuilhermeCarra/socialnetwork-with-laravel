@@ -8,7 +8,12 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm sticky-top">
             @include('includes.navbar')
         </nav>
-        @include('includes.search')
+        @if(auth()->user())
+            @include('includes/menu')
+            @include('includes.search')
+            @include('includes.friends')
+            @include('includes.newpost')
+        @endif
 
         <main class="py-4">
             @yield('content')

@@ -12,4 +12,9 @@ class Comment extends Model
     protected $fillable = [
         'content', 'user_id', 'user_post'
     ];
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id')->orderBy('created_at', 'desc');
+    }
 }

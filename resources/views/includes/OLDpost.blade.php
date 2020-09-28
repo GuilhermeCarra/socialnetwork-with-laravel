@@ -1,14 +1,19 @@
 
 @foreach ($posts as $post)
+@if(isset($friends))
+    @php 
+        $user = $friends[$post->user_id] 
+    @endphp
+@endif
 <div class="card post" data-post="{{$post->id}}">
         <div class="card-header">
             <div class="post__header d-flex flex-nowrap justify-content-between align-items-center">
                 <div class="post__header__user">
-                <a class=" font-weight-bold" href="{{$post->user->username}}">
-                    <img src="{{ $post->user->avatar ?? asset('assets/img/ghost-line.svg') }}" class="rounded-circle avatar" alt="avatar">
-                    {{ $post->user->name }}
+                <a class=" font-weight-bold" href="{{$user->username}}">
+                    <img src="{{ $user->avatar }}" class="rounded-circle avatar" alt="avatar">
+                    {{ $user->name }}
                 </a>
-                <small> {{'@'.$post->user->username }}</small>
+                <small> {{'@'.$user->username }}</small>
             </div>
             <div class="post__header__menu">
                 <div class="post__header__menu--btn">
@@ -25,7 +30,7 @@
             </div>
             @if($post->image)
             <div class="post__body__image">
-                <img src="{{$post->image}}" class="card-img-bottom" loading="lazy" alt="post image">
+                <img width="100%" src="{{$post->image}}" class="card-img-bottom" loading="lazy" alt="post image">
             </div>
             @endif
             <div class="post__body__reactions d-flex flex-start flex-nowrap align-items-center">
@@ -50,7 +55,7 @@
             <div class="d-flex flex-start flex-nowrap align-items-center">
                 <div class="comment__avatar__box mb-auto">
                     <a class="" href="{{ auth()->user()->username }}">
-                        <img src="{{ auth()->user()->avatar  ?? asset('assets/img/ghost-line.svg') }}" class="rounded-circle avatar" alt="avatar">
+                        <img src="{{ auth()->user()->avatar }}" class="rounded-circle avatar" alt="avatar">
                     </a>
                 </div>
                 <div class="comment__create d-flex flex-column w-100">
@@ -60,33 +65,33 @@
                         </a>
                         <p class="p-0 m-0"><small class="text-muted">Add a comment!</small></p>
                     </div>
-                    <div class="comment_create">
+                    <div class="comment_create__add">
                         <div class="form-group d-flex flex-nowrap justify-content-between">
                             <textarea class="form-control comment-textarea" name="newcomment" id="coment" cols="30" rows="1"></textarea>
-                            <button class="btn btn-primary mt-auto addComment-btn">Add</button>
+                            <button class="btn btn-primary mt-auto">Add</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- @foreach ($post->comments as $comment) --}}
-            @if(isset($post->comments[0]))
+        @foreach ($comments as $comment)
+            @if($post->id == $comment->post_id)
                 <div class="comment preview my-2">
                     <div class="d-flex flex-start flex-nowrap align-items-center">
                         <div class="comment__avatar__box">
-                            <a class="" href="{{ $post->comments[0]->user->username }}">
-                                <img src="{{ $post->comments[0]->user->avatar  ?? asset('assets/img/ghost-line.svg')}}" class="rounded-circle avatar" alt="avatar">
+                            <a class="" href="{{ $commentingUsers[$comment->user_id]->username }}">
+                                <img src="{{ $commentingUsers[$comment->user_id]->avatar }}" class="rounded-circle avatar" alt="avatar">
                             </a>
                         </div>
                         <div class="comment__content d-flex flex-column">
                             <div class="d-flex flex-wrap m-0">
-                                <a class="mr-2" href="{{ $post->comments[0]->user->username }}">
-                                    {{$post->comments[0]->user->name }}
+                                <a class="mr-2" href="{{ $commentingUsers[$comment->user_id]->username }}">
+                                    {{$commentingUsers[$comment->user_id]->name }}
                                 </a>
-                                <p class="p-0 m-0"><small class="text-muted">{{ $post->comments[0]->created_at->diffForHumans() }}</small></p>
+                                <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
                             </div>
                             <div class="comment__content--box line-clamp">
-                                <p class="card-text">{{ $post->comments[0]->content }}</p>
+                                <p class="card-text">{{ $comment->content }}</p>
                             </div>
                         </div>
                     </div>
@@ -97,7 +102,7 @@
                     @endif
                 </div>
             @endif
-        {{-- @endforeach --}}
+        @endforeach
     </div>
 </div>
 @endforeach

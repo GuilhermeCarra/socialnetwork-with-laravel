@@ -1,0 +1,41 @@
+%search-friends-show
+    display: block
+    background: $dark-primary
+    animation: opacity1-visibility1 .3s forwards
+    transition: all .3s ease-in
+
+%search-friends-result
+    width: 90%
+    border-radius: 3px
+    padding: 15px
+    
+%search-friends-form
+    position: relative
+    animation: opacity1-visibility1 .3s .3s forwards
+    width: 100%
+
+%search-friends-close
+    position: absolute
+    top: -25px
+    right: 10px
+    display: inline-block
+    width: 30px
+    height: 30px
+    font-size: 30px
+    line-height: 35px
+    vertical-align: middle
+    cursor: pointer
+
+%search-friends-input
+    width: 90%
+    max-width: 500px
+    margin: 0 auto
+    background-color: rgba($blue-primary, .7)
+    &:focus
+        background-color: rgba($blue-primary, .7)
+
+%search-friends-result-searching
+    max-width: 500px
+    margin-top: -20px
+    transition: all .7s ease-in-out
+    box-shadow: 0 0.5rem 1rem rgba($gray-primary, .2)

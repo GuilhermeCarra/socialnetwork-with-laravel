@@ -41,4 +41,29 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get user by username.
+     * 
+     * @param string $username
+     * @return \App\Models\User
+     */
+    protected static function getUserByUsername(string $username){
+        return self::where('username', $username)->firstOrFail();
+    }
+
+    /**
+     * Get users who the current user follows
+     * 
+     * @return \App\Models\Follow
+     */
+    public function following(){
+        return $this->hasMany('App\Models\Follow', 'follower', 'id');
+    }
+
+    public function followers(){
+        return $this->hasMany('App\Models\Follow', 'followed', 'id');
+    }
+
+
 }

@@ -19,28 +19,27 @@ class UsersController extends Controller
     {
         if ($username == auth()->user()->username) {
             $user = auth()->user();
+            $posts = Post::getPostByUserId($user->id);
 
-            $posts = Post::where('user_id', $user->id)->get();
-            $postsID = $posts->pluck('id')->toArray();
-            
-            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
-            $commentingUsersID = $comments->pluck('user_id')->toArray();
-            
-            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
-            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers'));
+            if($request->ajax()) {
+                $view = view('includes.feed',compact(['posts']))->render();
+                return response()->json(['html'=>$view]);
+            }
+
+            return view('profile', compact('user', 'posts'));
+
         } else {
-            $user = User::where('username', $username)->firstOrFail();
+            $user = User::getUserByUsername($username);
+            $posts = Post::getPostByUserId($user->id);;
+            $following = Follow::isFollowed($user->id);
+            $followed = Follow::isFollower($user->id);
 
-            $posts = Post::where('user_id', $user->id)->get();
-            $postsID = $posts->pluck('id')->toArray();
+            if($request->ajax()) {
+                $view = view('includes.feed',compact(['posts']))->render();
+                return response()->json(['html'=>$view]);
+            }
 
-            $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at', 'desc')->get()->unique('post_id');
-            $commentingUsersID = $comments->pluck('user_id')->toArray();
-            $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
-
-            $following = Follow::where('follower', auth()->user()->id)->where('followed', $user->id)->count();
-
-            return view('profile', compact('user', 'posts', 'comments', 'commentingUsers', 'following'));
+            return view('profile', compact('user', 'posts', 'following', 'followed'));
         }
     }
 
