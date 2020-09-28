@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Models\Post;
 use Auth;
 
 class CommentsController extends Controller
@@ -34,10 +35,15 @@ class CommentsController extends Controller
             $comment->content = $request->content;
             $comment->save();
 
-            $comments = Comment::where('id',$comment->id)->first()->post->comments;
+            $post = Post::find($id);
+            $post->comments_count++;
+            $post->save();
+
+            $post = Comment::where('id',$comment->id)->first()->post;
+            $comments = $post->comments;
 
             $comments = view('includes.comments',compact(['comments']))->render();
-            return response()->json(['comments'=>$comments]);
+            return response()->json(['comments'=>$comments,'post'=>$post]);
         }
     }
 
