@@ -108,8 +108,17 @@ function addComment(){
 }
 
 function updatePost(post, data) {
+
+    $(post).find('.post-description').text(data.post.description);
+    if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
+    $(post).find('.card-img-bottom').attr('src',data.post.image);
+    console.log('1');
+    $(post).find('.dislikes-count').text(data.post.dislikes_count);
+    $(post).find('.likes-count').text(data.post.likes_count);
+    $(post).find('.comments-count').text(data.post.comments_count);
+
     if(data.comments.length) {
-        var commentBox = $(post).closest('.post').find('.comments-container');
+        var commentBox = $(post).find('.comments-container');
         var commentsBtn = $(post).find('.comments-guide');
 
         $(commentBox).find('.comment').remove();
@@ -118,5 +127,10 @@ function updatePost(post, data) {
         if ($(commentsBtn).text().includes('See more comments...')) {
             $(commentsBtn).trigger('click');
         }
+    } else {
+        for (let comment of data.post.comments) {
+            $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+        }
     }
+
 }
