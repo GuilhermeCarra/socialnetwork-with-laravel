@@ -7,5 +7,7 @@
             </div>
         </div>
     </div>
-    <div class="friends-list" id="friends-result"></div>
+    <div class="friends-list" id="friends-result">
+        @include('includes.friendslist')
+    </div>
 </div>
