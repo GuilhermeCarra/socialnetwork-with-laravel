@@ -1,5 +1,5 @@
 @foreach ($comments as $comment)
-    <div class="comment my-2">
+    <div class="comment my-2" data-comment="{{ $comment->id}}">
         <div class="d-flex flex-start flex-nowrap align-items-center">
             <div class="comment__avatar__box">
                 <a class="" href="{{ $comment->user->username }}">
