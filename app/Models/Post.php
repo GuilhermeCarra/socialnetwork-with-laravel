@@ -45,4 +45,8 @@ class Post extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
+
+    public function reactions() {
+        return $this->hasMany('App\Models\Reaction');
+    }
 }
