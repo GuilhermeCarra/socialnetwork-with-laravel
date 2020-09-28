@@ -18,6 +18,12 @@
         },
         openMenu: function (e) {
             this.menu.toggleClass('open')
+            if($('#menu-btn i').hasClass('ri-menu-2-fill')){
+                $('#menu-btn i').addClass('ri-close-line').removeClass('ri-menu-2-fill')
+            }else{
+                $('#menu-btn i').addClass('ri-menu-2-fill').removeClass('ri-close-line')
+            }
+
         },
         openNewPost: function () {
             $('#friends.show, #search.show').removeClass('show')
