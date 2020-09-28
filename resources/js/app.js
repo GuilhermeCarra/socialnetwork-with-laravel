@@ -1,3 +1,4 @@
+import { update } from 'lodash';
 import 'remixicon/fonts/remixicon.css'
 require('./bootstrap');
 
@@ -54,7 +55,7 @@ function setLoadCommentsBtn() {
 
 function loadMoreComments(event) {
     var button = $(event.target);
-    var id = $(event.target).attr("id").split('_')[1];
+    var id = $(event.target).closest('.post').attr('data-post');
     $(event.target).text('Loading comments...');
     $.ajax({
         url: 'comments/post/' + id,
@@ -78,7 +79,7 @@ function setTextareaHeightAuto() {
 }
 
 function closeComments() {
-    $(event.target).siblings('.comment').remove();
+    $(event.target).siblings('.comment').not(':first').remove();
     $(event.target).text('See more comments...').on('click', loadMoreComments);
 }
 
@@ -93,7 +94,7 @@ function addComment(){
     var id = $(event.target).closest('.post').attr('data-post');
     var comment = $(event.target).siblings('textarea').val();
     $(event.target).siblings('textarea').val('')
-    var commentBox = $(event.target).closest('.post').find('.comments-container');
+    var post = $(event.target).closest('.post');
     $.ajax({
         url: 'comments/create/' + id,
         headers: {
@@ -102,10 +103,20 @@ function addComment(){
         data: { content: comment },
         type: 'POST',
     }).done(function(data) {
-        $(commentBox).prepend(data);
+        updatePost(post,data);
     });
 }
 
-function updatePost($post) {
-    
+function updatePost(post, data) {
+    if(data.comments.length) {
+        var commentBox = $(post).closest('.post').find('.comments-container');
+        var commentsBtn = $(post).find('.comments-guide');
+
+        $(commentBox).find('.comment').remove();
+        $(commentBox).prepend(data.comments);
+
+        if ($(commentsBtn).text().includes('See more comments...')) {
+            $(commentsBtn).trigger('click');
+        }
+    }
 }
