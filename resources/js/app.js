@@ -8,6 +8,7 @@ document.onreadystatechange = () => {
 $( document ).ready(function() {
     setLoadCommentsBtn();
     setTextareaHeightAuto()
+    setAddCommentBtn();
 });
 
 
@@ -75,4 +76,28 @@ function setTextareaHeightAuto(){
 function closeComments() {
     $(event.target).siblings('.comment').remove();
     $(event.target).text('See more comments...').on('click', loadMoreComments);
+}
+
+function setAddCommentBtn() {
+    $('.addComment-btn').each(function () {
+        $(this).on('click', addComment);
+        $(this).removeClass('addComment-btn');
+    });
+}
+
+function addComment(){
+    var id = $(event.target).closest('.post').attr('data-post');
+    var comment = $(event.target).siblings('textarea').val();
+    $(event.target).siblings('textarea').val('')
+    var commentBox = $(event.target).closest('.post').find('.comments-container');
+    $.ajax({
+        url: 'comments/create/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { content: comment },
+        type: 'POST',
+    }).done(function(data) {
+        $(commentBox).prepend(data);
+    });
 }
