@@ -65,5 +65,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Follow', 'followed', 'id');
     }
 
+    public function friendsIds() {
+        return $this->following()->pluck('followed')->toArray();
+    }
+
 
 }
