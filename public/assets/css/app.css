@@ -10967,6 +10967,10 @@ li {
   background-color: #d75548;
 }
 
+.bg-green {
+  background-color: #38c172;
+}
+
 .bg-light-gray {
   background-color: rgba(63, 77, 81, 0.1);
 }
@@ -11216,6 +11220,7 @@ li {
 
 .friends .friends-list {
   height: 80%;
+  overflow-y: auto;
 }
 
 .friends.show {
@@ -11234,6 +11239,51 @@ li {
   height: 80%;
   -webkit-animation: opacity1-visibility1 2s forwards;
           animation: opacity1-visibility1 2s forwards;
+}
+
+.friends.show .friend-item {
+  padding: 3px 5px;
+  margin: 2px 0;
+  border-radius: 3px;
+}
+
+.friends.show .friend-item:hover {
+  background-color: rgba(124, 214, 241, 0.05);
+  font-weight: bold;
+}
+
+.friends.show .friend-item:hover .friend-item-action {
+  color: #3f4d51;
+}
+
+.friends.show .friend-item:hover .avatar {
+  transform: scale(1.2);
+}
+
+.friends.show .friend-item a,
+.friends.show .friend-item a:link,
+.friends.show .friend-item a:active,
+.friends.show .friend-item a:visited {
+  color: #f8fafc;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+.friends.show .friend-item a:hover,
+.friends.show .friend-item a:link:hover,
+.friends.show .friend-item a:active:hover,
+.friends.show .friend-item a:visited:hover {
+  font-weight: bold;
+}
+
+.friends.show .friend-item a .avatar,
+.friends.show .friend-item a:link .avatar,
+.friends.show .friend-item a:active .avatar,
+.friends.show .friend-item a:visited .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .newpost.show,
@@ -11477,13 +11527,13 @@ li {
   font-size: 18px;
 }
 
-.avatar {
+.post .avatar {
   width: 30px;
   height: 30px;
 }
 
 @media all and (min-width: 576px) {
-  .avatar {
+  .post .avatar {
     width: 45px;
     height: 45px;
   }
