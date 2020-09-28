@@ -116,8 +116,22 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $postID = $comment->post_id;
+        $comment->delete();
+
+        $post = Post::find($postID);
+        $post->comments_count--;
+        $post->save();
+
+        $post = Comment::where('post_id',$postID)->first()->post;
+        $comments = $post->comments;
+
+        if($request->ajax()) {
+            $comments = view('includes.comments',compact(['comments']))->render();
+            return response()->json(['comments'=>$comments,'post'=>$post]);
+        }
     }
 }

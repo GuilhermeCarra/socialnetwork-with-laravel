@@ -12,6 +12,9 @@
                         {{ $comment->user->name }}
                     </a>
                     <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
+                    @if ($comment->user->id == Auth::user()->id)
+                        <div class="commentDelete-btn pointer">🗑️</div>
+                    @endif
                 </div>
                 <div class="comment__content--box">
                     <p class="card-text">{{ $comment->content }}</p>

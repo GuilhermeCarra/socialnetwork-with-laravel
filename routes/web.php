@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/{username}', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/comments/post/{id}', [App\Http\Controllers\CommentsController::class, 'loadPostComments']);
     Route::post('/comments/create/{id}', [App\Http\Controllers\CommentsController::class, 'create']);
+    Route::delete('/comments/delete/{id}', [App\Http\Controllers\CommentsController::class, 'destroy']);
     Route::post('/follow', [App\Http\Controllers\FollowsController::class, 'store'])->name('follow');
     Route::delete('/unfollow', [App\Http\Controllers\FollowsController::class, 'destroy'])->name('unfollow');
 });

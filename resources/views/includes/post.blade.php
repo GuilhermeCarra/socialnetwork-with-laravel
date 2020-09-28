@@ -73,8 +73,8 @@
         </div>
         {{-- @foreach ($post->comments as $comment) --}}
             @if(isset($post->comments[0]))
-                <div class="comment preview my-2 comments-container" data-comment="{{ $post->comments[0]->id }}">
-                    <div class="d-flex flex-start flex-nowrap align-items-center comment">
+                <div class="comment preview my-2 comments-container">
+                    <div class="d-flex flex-start flex-nowrap align-items-center comment" data-comment="{{ $post->comments[0]->id }}">
                         <div class="comment__avatar__box">
                             <a class="" href="{{ $post->comments[0]->user->username }}">
                                 <img src="{{ $post->comments[0]->user->avatar  ?? asset('assets/img/ghost-line.svg')}}" class="rounded-circle avatar" alt="avatar">
@@ -86,12 +86,16 @@
                                     {{$post->comments[0]->user->name }}
                                 </a>
                                 <p class="p-0 m-0"><small class="text-muted">{{ $post->comments[0]->created_at->diffForHumans() }}</small></p>
+                                @if ($post->comments[0]->user->id == Auth::user()->id)
+                                <div class="commentDelete-btn">🗑️</div>
+                                @endif
                             </div>
                             <div class="comment__content--box line-clamp">
                                 <p class="card-text">{{ $post->comments[0]->content }}</p>
                             </div>
                         </div>
                     </div>
+                    
                     @if ($post->comments_count > 1)
                     <div class="mt-4 mb-2 p-0 btn text-center w-100 bg-light-gray pointer comments-btn comments-guide">
                         See more comments...

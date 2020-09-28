@@ -13,6 +13,7 @@ $(document).ready(function () {
     setLoadCommentsBtn();
     setTextareaHeightAuto()
     setAddCommentBtn();
+    setDeleteCommentBtn();
 });
 
 var postsPage = 1;
@@ -41,6 +42,8 @@ function loadPosts() {
             $('#load-message').addClass('d-none');
             $('#container-feed').append(data.html);
             setLoadCommentsBtn();
+            setAddCommentBtn();
+            setDeleteCommentBtn();
         }
     });
 }
@@ -63,8 +66,6 @@ function loadMoreComments(event) {
         type: 'GET',
     }).done(function (data) {
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
-        // $(button).before(data);
-        console.log(data)
         updatePost(post,data);
         $(button).text('Close comments...').unbind().on('click',closeComments);
     })
@@ -134,5 +135,26 @@ function updatePost(post, data) {
             $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
         }
     }
+    $(commentBox).on('click','.commentDelete-btn',deleteComment);
+}
 
+function setDeleteCommentBtn() {
+    $('.commentDelete-btn').each(function () {
+        $(this).on('click', deleteComment);
+        $(this).removeClass('commentDelete-btn');
+    });
+}
+
+function deleteComment() {
+    var id = $(event.target).closest('.comment').attr('data-comment');
+    var post = $(event.target).closest('.post');
+    $.ajax({
+        url: 'comments/delete/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'DELETE',
+    }).done(function(data) {
+        updatePost(post,data);
+    });
 }
