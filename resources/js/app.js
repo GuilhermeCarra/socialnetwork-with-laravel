@@ -105,3 +105,7 @@ function addComment(){
         $(commentBox).prepend(data);
     });
 }
+
+function updatePost($post) {
+    
+}
