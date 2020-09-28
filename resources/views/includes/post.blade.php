@@ -5,6 +5,7 @@
         $user = $friends[$post->user_id] 
     @endphp
 @endif
+
 <div class="card post" data-post="{{$post->id}}">
         <div class="card-header">
             <div class="post__header d-flex flex-nowrap justify-content-between align-items-center">
@@ -68,7 +69,7 @@
                     <div class="comment_create__add">
                         <div class="form-group d-flex flex-nowrap justify-content-between">
                             <textarea class="form-control comment-textarea" name="newcomment" id="coment" cols="30" rows="1"></textarea>
-                            <button class="btn btn-primary mt-auto">Add</button>
+                            <button class="btn btn-primary mt-auto addComment-btn">Add</button>
                         </div>
                     </div>
                 </div>
@@ -76,7 +77,7 @@
         </div>
         @foreach ($comments as $comment)
             @if($post->id == $comment->post_id)
-                <div class="comment preview my-2">
+                <div class="comment preview my-2 comments-container">
                     <div class="d-flex flex-start flex-nowrap align-items-center">
                         <div class="comment__avatar__box">
                             <a class="" href="{{ $commentingUsers[$comment->user_id]->username }}">
