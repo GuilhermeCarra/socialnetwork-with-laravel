@@ -77,11 +77,14 @@ class CommentsController extends Controller
      */
     public function loadPostComments(Request $request, $id)
     {
-        $comments = Comment::where('post_id',$id)->orderBy('created_at','desc')->get()->skip(1);
+        $post = Comment::where('post_id',$id)->first()->post;
+        $comments = $post->comments;
+
         if($request->ajax()) {
-            $view = view('includes.comments',compact(['comments']))->render();
-            return $view;
+            $comments = view('includes.comments',compact(['comments']))->render();
+            return response()->json(['comments'=>$comments,'post'=>$post]);
         }
+
     }
 
     /**
