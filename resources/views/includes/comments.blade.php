@@ -1,5 +1,5 @@
 @foreach ($comments as $comment)
-    <div class="comment my-2">
+    <div class="comment my-2" data-comment="{{ $comment->id}}">
         <div class="d-flex flex-start flex-nowrap align-items-center">
             <div class="comment__avatar__box">
                 <a class="" href="{{ $comment->user->username }}">
@@ -12,6 +12,9 @@
                         {{ $comment->user->name }}
                     </a>
                     <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
+                    @if ($comment->user->id == Auth::user()->id)
+                        <div class="commentDelete-btn pointer">🗑️</div>
+                    @endif
                 </div>
                 <div class="comment__content--box">
                     <p class="card-text">{{ $comment->content }}</p>

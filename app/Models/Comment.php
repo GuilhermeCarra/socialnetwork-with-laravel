@@ -17,4 +17,13 @@ class Comment extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id')->orderBy('created_at', 'desc');
     }
+
+    public function post()
+    {
+        return $this->hasOne('App\Models\Post', 'id', 'post_id');
+    }
+
+    public function samePostComments() {
+        return self::where('post_id', $this->post_id)->orderBy('created_at', 'desc')->get();
+    }
 }

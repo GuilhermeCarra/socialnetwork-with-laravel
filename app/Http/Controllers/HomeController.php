@@ -27,22 +27,15 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $friendsID = Follow::where('follower',auth()->id())->pluck('followed')->toArray();
-        $friends = User::whereIn('id', $friendsID)->get()->keyBy('id');
+        $friendsID = auth()->user()->friendsIds();
 
         $posts = Post::whereIn('user_id', $friendsID)->orderBy('created_at','desc')->paginate(3);
-        $postsID = $posts->pluck('id')->toArray();
-
-        $comments = Comment::whereIn('post_id', $postsID)->orderBy('created_at','desc')->get()->unique('post_id');
-        $commentingUsersID = $comments->pluck('user_id')->toArray();
-
-        $commentingUsers = User::whereIn('id', $commentingUsersID)->get()->keyBy('id');
 
         if($request->ajax()) {
-            $view = view('includes.feed',compact(['posts','friends','comments','commentingUsers']))->render();
+            $view = view('includes.feed',compact(['posts']))->render();
             return response()->json(['html'=>$view]);
         }
 
-        return view('home',compact(['posts', 'friends','comments', 'commentingUsers']));
+        return view('home',compact(['posts']));
     }
 }

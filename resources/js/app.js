@@ -1,3 +1,4 @@
+import { update } from 'lodash';
 import 'remixicon/fonts/remixicon.css'
 require('./bootstrap');
 
@@ -11,6 +12,8 @@ document.onreadystatechange = () => {
 $(document).ready(function () {
     setLoadCommentsBtn();
     setTextareaHeightAuto()
+    setAddCommentBtn();
+    setDeleteCommentBtn();
 });
 
 var postsPage = 1;
@@ -39,6 +42,8 @@ function loadPosts() {
             $('#load-message').addClass('d-none');
             $('#container-feed').append(data.html);
             setLoadCommentsBtn();
+            setAddCommentBtn();
+            setDeleteCommentBtn();
         }
     });
 }
@@ -53,16 +58,16 @@ function setLoadCommentsBtn() {
 
 function loadMoreComments(event) {
     var button = $(event.target);
-    var id = $(event.target).attr("id").split('_')[1];
+    var post = $(event.target).closest('.post')
+    var id = $(post).attr('data-post');
     $(event.target).text('Loading comments...');
     $.ajax({
         url: 'comments/post/' + id,
         type: 'GET',
     }).done(function (data) {
-        console.log(data);
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
-        $(button).before(data);
-        $(button).text('Close comments...');
+        updatePost(post,data);
+        $(button).text('Close comments...').unbind().on('click',closeComments);
     })
 }
 
@@ -74,5 +79,82 @@ function setTextareaHeightAuto() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight + 2) + 'px';
         }
+    });
+}
+
+function closeComments() {
+    $(event.target).siblings('.comment').not(':first').remove();
+    $(event.target).text('See more comments...').on('click', loadMoreComments);
+}
+
+function setAddCommentBtn() {
+    $('.addComment-btn').each(function () {
+        $(this).on('click', addComment);
+        $(this).removeClass('addComment-btn');
+    });
+}
+
+function addComment(){
+    var id = $(event.target).closest('.post').attr('data-post');
+    var comment = $(event.target).siblings('textarea').val();
+    $(event.target).siblings('textarea').val('')
+    var post = $(event.target).closest('.post');
+    $.ajax({
+        url: 'comments/create/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { content: comment },
+        type: 'POST',
+    }).done(function(data) {
+        updatePost(post,data);
+    });
+}
+
+function updatePost(post, data) {
+
+    $(post).find('.post-description').text(data.post.description);
+    if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
+    $(post).find('.card-img-bottom').attr('src',data.post.image);
+    $(post).find('.dislikes-count').text(data.post.dislikes_count);
+    $(post).find('.likes-count').text(data.post.likes_count);
+    $(post).find('.comments-count').text(data.post.comments_count);
+
+    if(data.comments.length) {
+        var commentBox = $(post).find('.comments-container');
+        var commentsBtn = $(post).find('.comments-guide');
+
+        if ($(commentsBtn).text().includes('See more comments...')) {
+            $(commentsBtn).trigger('click');
+        } else {
+            $(commentBox).find('.comment').remove();
+            $(commentBox).prepend(data.comments);
+        }
+    } else {
+        for (let comment of data.post.comments) {
+            $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+        }
+    }
+    $(commentBox).on('click','.commentDelete-btn',deleteComment);
+}
+
+function setDeleteCommentBtn() {
+    $('.commentDelete-btn').each(function () {
+        $(this).on('click', deleteComment);
+        $(this).removeClass('commentDelete-btn');
+    });
+}
+
+function deleteComment() {
+    var id = $(event.target).closest('.comment').attr('data-comment');
+    var post = $(event.target).closest('.post');
+    $.ajax({
+        url: 'comments/delete/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'DELETE',
+    }).done(function(data) {
+        updatePost(post,data);
     });
 }

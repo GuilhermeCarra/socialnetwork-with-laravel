@@ -33,7 +33,7 @@ class Post extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->orderBy('created_at', 'desc');
     }
     
     /**
@@ -44,5 +44,9 @@ class Post extends Model
     public function user()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
+
+    public function reactions() {
+        return $this->hasMany('App\Models\Reaction');
     }
 }

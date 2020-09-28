@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
-use App\Models\User;
+use App\Models\Post;
+use Auth;
 
 class CommentsController extends Controller
 {
@@ -23,9 +24,27 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $id)
     {
-        //
+        if($request->ajax()) {
+
+            $user = auth()->user();
+            $comment = new Comment;
+            $comment->post_id = $id;
+            $comment->user_id = $user->id;
+            $comment->content = $request->content;
+            $comment->save();
+
+            $post = Post::find($id);
+            $post->comments_count++;
+            $post->save();
+
+            $post = Comment::where('id',$comment->id)->first()->post;
+            $comments = $post->comments;
+
+            $comments = view('includes.comments',compact(['comments']))->render();
+            return response()->json(['comments'=>$comments,'post'=>$post]);
+        }
     }
 
     /**
@@ -58,12 +77,14 @@ class CommentsController extends Controller
      */
     public function loadPostComments(Request $request, $id)
     {
-        $comments = Comment::where('post_id',$id)->orderBy('created_at','desc')->get()->skip(1);
-        // $users = User::whereIn('id', $comments->pluck('user_id')->toArray())->get()->keyBy('id');
+        $post = Comment::where('post_id',$id)->first()->post;
+        $comments = $post->comments;
+
         if($request->ajax()) {
-            $view = view('includes.comments',compact(['comments']))->render();
-            return $view;
+            $comments = view('includes.comments',compact(['comments']))->render();
+            return response()->json(['comments'=>$comments,'post'=>$post]);
         }
+
     }
 
     /**
@@ -95,8 +116,22 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $postID = $comment->post_id;
+        $comment->delete();
+
+        $post = Post::find($postID);
+        $post->comments_count--;
+        $post->save();
+
+        $post = Comment::where('post_id',$postID)->first()->post;
+        $comments = $post->comments;
+
+        if($request->ajax()) {
+            $comments = view('includes.comments',compact(['comments']))->render();
+            return response()->json(['comments'=>$comments,'post'=>$post]);
+        }
     }
 }
