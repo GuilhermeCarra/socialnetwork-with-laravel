@@ -21,25 +21,27 @@
         <div class="post__body">
             <div class="post__body__content">
                 <p class="p-0 m-0"><small class="text-muted">{{ $post->created_at->diffForHumans() }}</small></p>
-                <p class="card-text line-clamp-3">{{ $post->description }}</p>
+                <p class="card-text line-clamp-3 post-description">{{ $post->description }}</p>
             </div>
-            @if($post->image)
             <div class="post__body__image">
+                @if($post->image)
                 <img src="{{$post->image}}" class="card-img-bottom" loading="lazy" alt="post image">
+                @else
+                <img src="" class="card-img-bottom d-none" loading="lazy" alt="post image">
+                @endif
             </div>
-            @endif
             <div class="post__body__reactions d-flex flex-start flex-nowrap align-items-center">
                 <p class="card-text mr-3 mb-0">
                     <i class="ri-thumb-up-line"></i>
-                    <small class="text-muted"> {{ $post->likes_count }}</small> 
+                    <small class="text-muted likes-count"> {{ $post->likes_count }}</small> 
                 </p>
                 <p class="mr-3 mb-0">
                     <i class="ri-thumb-down-line"></i>
-                    <small class="text-muted">{{ $post->dislikes_count }}</small>
+                    <small class="text-muted dislikes-count">{{ $post->dislikes_count }}</small>
                 </p>
                 <p class="mr-3 mb-0">
                     <i class="ri-chat-3-line"></i>
-                    <small class="text-muted">{{ $post->comments_count }}</small>
+                    <small class="text-muted comments-count">{{ $post->comments_count }}</small>
                 </p>
             </div>
         </div>
@@ -71,7 +73,7 @@
         </div>
         {{-- @foreach ($post->comments as $comment) --}}
             @if(isset($post->comments[0]))
-                <div class="comment preview my-2 comments-container">
+                <div class="comment preview my-2 comments-container" data-comment="{{ $post->comments[0]->id }}">
                     <div class="d-flex flex-start flex-nowrap align-items-center comment">
                         <div class="comment__avatar__box">
                             <a class="" href="{{ $post->comments[0]->user->username }}">
