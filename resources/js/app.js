@@ -55,14 +55,17 @@ function setLoadCommentsBtn() {
 
 function loadMoreComments(event) {
     var button = $(event.target);
-    var id = $(event.target).closest('.post').attr('data-post');
+    var post = $(event.target).closest('.post')
+    var id = $(post).attr('data-post');
     $(event.target).text('Loading comments...');
     $.ajax({
         url: 'comments/post/' + id,
         type: 'GET',
     }).done(function (data) {
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
-        $(button).before(data);
+        // $(button).before(data);
+        console.log(data)
+        updatePost(post,data);
         $(button).text('Close comments...').unbind().on('click',closeComments);
     })
 }
@@ -112,7 +115,6 @@ function updatePost(post, data) {
     $(post).find('.post-description').text(data.post.description);
     if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
     $(post).find('.card-img-bottom').attr('src',data.post.image);
-    console.log('1');
     $(post).find('.dislikes-count').text(data.post.dislikes_count);
     $(post).find('.likes-count').text(data.post.likes_count);
     $(post).find('.comments-count').text(data.post.comments_count);
@@ -121,11 +123,11 @@ function updatePost(post, data) {
         var commentBox = $(post).find('.comments-container');
         var commentsBtn = $(post).find('.comments-guide');
 
-        $(commentBox).find('.comment').remove();
-        $(commentBox).prepend(data.comments);
-
         if ($(commentsBtn).text().includes('See more comments...')) {
             $(commentsBtn).trigger('click');
+        } else {
+            $(commentBox).find('.comment').remove();
+            $(commentBox).prepend(data.comments);
         }
     } else {
         for (let comment of data.post.comments) {
