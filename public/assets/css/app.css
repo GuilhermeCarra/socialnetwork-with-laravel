@@ -11012,19 +11012,21 @@ li {
 }
 
 .navbar {
-  height: 50px;
+  height: auto;
 }
 
 .navbar .container {
   font-size: 16px;
 }
 
-.navbar .container .navbar-item {
+.navbar .container .navbar-item,
+.navbar .container .nav-item {
   display: inline-block;
   padding: 9px 3px;
 }
 
-.navbar .container .navbar-item .navbar-link {
+.navbar .container .navbar-item .navbar-link,
+.navbar .container .nav-item .navbar-link {
   display: inline-block;
   margin: 0;
   width: 25px;
