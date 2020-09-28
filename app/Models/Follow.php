@@ -39,4 +39,14 @@ class Follow extends Model
     protected static function isFollower(int $id){
         return Follow::where('follower', $id)->where('followed', auth()->user()->id)->count();
     }
+
+    public function userFollowed()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'followed');
+    }
+
+    public function userFollower()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'follower');
+    }
 }
