@@ -14,6 +14,7 @@
         visibility: visible
     .friends-list
         height: 80%
+        overflow-y: auto
         @extend %search-friends-result
     &.show
         left: 0
@@ -31,3 +32,27 @@
             height: 80%
             @extend %search-friends-result-searching
             animation: opacity1-visibility1 2s forwards
+        .friend-item
+            padding: 3px 5px
+            margin: 2px 0
+            border-radius: 3px
+            &:hover
+                background-color: rgba($blue-secondary, .05)
+                font-weight: bold
+                .friend-item-action
+                    color: $dark-primary
+                .avatar
+                    transform: scale(1.2)
+            a, a:link, a:active, a:visited
+                color: $white
+                padding: 5px 5px
+                text-decoration: none
+                &:hover
+                    font-weight: bold
+                    letter-spacing: 1px
+                .avatar
+                    width: 40px
+                    height: 40px
+                    border-radius: 50%
+                    margin-right: 5px
+
