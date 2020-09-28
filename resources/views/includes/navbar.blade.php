@@ -3,42 +3,40 @@
         {{ config('app.name') }}
     </a>
 
-
         <!-- Right Side Of Navbar -->
-        <ul class="navbar-icons mb-0 ml-auto">
+    <ul class="navbar-icons mb-0 ml-auto">
             <!-- Authentication Links -->
-            @guest
-            <li class="nav-item">
+        @guest
+        <li class="nav-item">
             <a class="nav-link {{Request::is('login') ? 'active' : ''}}" href="{{ route('login') }}"><i class="ri-login-box-line"></i>{{ __('Login') }}</a>
-            </li>
-            @if (Route::has('register'))
-            <li class="nav-item">
-                <a class="nav-link {{Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}"><i class="ri-user-add-line"></i>{{ __('Register') }}</a>
-            </li>
-            @endif
-            @else
+        </li>
+        @if (Route::has('register'))
+        <li class="nav-item">
+            <a class="nav-link {{Request::is('register') ? 'active' : ''}}" href="{{ route('register') }}"><i class="ri-user-add-line"></i>{{ __('Register') }}</a>
+        </li>
+        @endif
+        @else
             
-            <li class="navbar-item" id="search-button">
-                {{-- @include('includes.search_button') --}}
-                <span class="navbar-link bg-blue-primary">
-                    <i class="ri-search-line text-white"></i>
-                </span>
-            </li>
+        <li class="navbar-item" id="search-button">
+            <span class="navbar-link bg-blue-primary">
+                <i class="ri-search-line text-white"></i>
+            </span>
+        </li>
 
-            <li class="navbar-item">
-                <a class="navbar-link" href="{{ route('home') }}"><i class="ri-home-5-{{Request::is('/') || Request::is('home') ? 'fill' : 'line'}}"></i></a>
-            </li>
+        <li class="navbar-item">
+            <a class="navbar-link" href="{{ route('home') }}"><i class="ri-home-5-{{Request::is('/') || Request::is('home') ? 'fill' : 'line'}}"></i></a>
+        </li>
 
-            <li class="navbar-item">
-                <a class="navbar-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+        <li class="navbar-item">
+            <a class="navbar-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();">
-                    <i class="ri-logout-box-r-line"></i>
-                </a>
-            </li>
+                <i class="ri-logout-box-r-line"></i>
+            </a>
+        </li>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-            @endguest
-        </ul>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+        @endguest
+    </ul>
 </div>
