@@ -1,4 +1,9 @@
-import { update } from 'lodash';
+import {
+    post
+} from 'jquery';
+import {
+    update
+} from 'lodash';
 import 'remixicon/fonts/remixicon.css'
 require('./bootstrap');
 
@@ -7,6 +12,7 @@ document.onreadystatechange = () => {
     require('./customjs/search');
     require('./customjs/friends');
     require('./customjs/newpost');
+    require('./customjs/post');
 }
 
 $(document).ready(function () {
@@ -26,6 +32,53 @@ $(window).on('scroll', function () {
     }
 });
 
+
+var observer
+let contentBox;
+
+let nextArticleID = 1;
+let visibleAds = new Set();
+let previouslyVisibleAds = null;
+let refreshIntervalID = 0;
+
+function uploadPost(entries) {
+    entries.forEach((entry) => {
+
+        if(entry.isIntersecting){
+            let postId = entry.target
+            $.ajax({
+                url: 'post/show',
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {postId: postId.dataset.post}
+            }).done(function(response){
+                console.log(response);
+                updatePost(postId, response)
+            })
+
+        }
+    })
+}
+
+function initObserver() {
+    let posts = document.querySelectorAll('[data-post]')
+    observer = null
+    let options = {
+        threshold: [0.5]
+    }
+    observer = new IntersectionObserver(uploadPost, options)
+
+    for (let post of posts) {
+        observer.unobserve(post)
+    }
+
+    for (let post of posts) {
+        observer.observe(post)
+    }
+}
+
 function loadPosts() {
     let url = window.location.pathname + '?page='
     $.ajax({
@@ -44,6 +97,7 @@ function loadPosts() {
             setLoadCommentsBtn();
             setAddCommentBtn();
             setDeleteCommentBtn();
+            initObserver()
         }
     });
 }
@@ -66,8 +120,8 @@ function loadMoreComments(event) {
         type: 'GET',
     }).done(function (data) {
         $(`[data-post="${id}"] .comment__content--box`).removeClass('line-clamp')
-        updatePost(post,data);
-        $(button).text('Close comments...').unbind().on('click',closeComments);
+        updatePost(post, data);
+        $(button).text('Close comments...').unbind().on('click', closeComments);
     })
 }
 
@@ -94,33 +148,36 @@ function setAddCommentBtn() {
     });
 }
 
-function addComment(){
+function addComment(event) {
     var id = $(event.target).closest('.post').attr('data-post');
-    var comment = $(event.target).siblings('textarea').val();
-    $(event.target).siblings('textarea').val('')
+    var comment = $(event.target).parent().siblings('textarea').val();
+    $(event.target).parent().siblings('textarea').val('')
     var post = $(event.target).closest('.post');
+    console.log(comment);
     $.ajax({
         url: 'comments/create/' + id,
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        data: { content: comment },
+        data: {
+            content: comment
+        },
         type: 'POST',
-    }).done(function(data) {
-        updatePost(post,data);
+    }).done(function (data) {
+        updatePost(post, data);
     });
 }
 
 function updatePost(post, data) {
 
     $(post).find('.post-description').text(data.post.description);
-    if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
-    $(post).find('.card-img-bottom').attr('src',data.post.image);
+    if (data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
+    $(post).find('.card-img-bottom').attr('src', data.post.image);
     $(post).find('.dislikes-count').text(data.post.dislikes_count);
     $(post).find('.likes-count').text(data.post.likes_count);
     $(post).find('.comments-count').text(data.post.comments_count);
 
-    if(data.comments.length) {
+    if (data.comments.length) {
         var commentBox = $(post).find('.comments-container');
         var commentsBtn = $(post).find('.comments-guide');
 
@@ -132,10 +189,10 @@ function updatePost(post, data) {
         }
     } else {
         for (let comment of data.post.comments) {
-            $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+            $('[data-comment=' + comment.id + ']').find('.card-text').text(comment.content);
         }
     }
-    $(commentBox).on('click','.commentDelete-btn',deleteComment);
+    $(commentBox).on('click', '.commentDelete-btn', deleteComment);
 }
 
 function setDeleteCommentBtn() {
@@ -154,7 +211,7 @@ function deleteComment() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: 'DELETE',
-    }).done(function(data) {
-        updatePost(post,data);
+    }).done(function (data) {
+        updatePost(post, data);
     });
 }
