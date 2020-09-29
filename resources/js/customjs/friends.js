@@ -1,4 +1,4 @@
-(function(){
+(function () {
     const friends = {
         init: function () {
             this.cacheDom()
@@ -10,14 +10,24 @@
             this.input = $('#friends-input')
             this.results = $('#friends-result')
         },
-        bindEvents: function(){
+        bindEvents: function () {
             this.input.on('input', this.showResults.bind(this))
             this.form.on('click', '.friends-close', this.closeFriends.bind(this))
         },
-        showResults: function(){
+        showResults: function () {
             this.results.addClass('searching').fadeIn()
+            $.ajax({
+                method: "GET",
+                url: 'search?username=' + this.input.val(),
+                beforeSend: function(){
+                    $('#friends-result').html()
+                }
+            }).done(function(data){
+                $('#friends-result').html(data.html)
+
+            })
         },
-        closeFriends: function(){
+        closeFriends: function () {
             this.input.val("")
             this.results.removeClass('searching')
             $('body').removeClass('stop-scroll')
