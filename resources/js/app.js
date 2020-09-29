@@ -155,7 +155,6 @@ function addComment(event) {
     var comment = $(event.target).parent().siblings('textarea').val();
     $(event.target).parent().siblings('textarea').val('')
     var post = $(event.target).closest('.post');
-    console.log(comment);
     $.ajax({
         url: 'comments/create/' + id,
         headers: {
@@ -196,7 +195,8 @@ function updatePost(post, data) {
         var commentsBtn = $(post).find('.comments-guide');
 
         if ($(commentsBtn).text().includes('See more comments...')) {
-            $(commentsBtn).trigger('click');
+            // $(commentsBtn).trigger('click');
+            updateFirstPost(data.post.comments[0], commentBox)
         } else {
             $(commentBox).find('.comment').remove();
             $(commentBox).prepend(data.comments);
@@ -209,6 +209,17 @@ function updatePost(post, data) {
         }
     }
     $(commentBox).on('click', '.commentDelete-btn', deleteComment);
+}
+
+function updateFirstPost(commentData, container) {
+    var comment = $(container).find('.comment');
+    $(comment).attr('data-comment',commentData.id);
+    $(comment).find('.card-text').text(commentData.content);
+    $(comment).find('img').attr('src',commentData.user.avatar);
+    var links = $(comment).find('a');
+    $(links[0]).attr('href',commentData.user.username);
+    $(links[1]).attr('href',commentData.user.username).text(commentData.user.name);
+    $(comment).find('.delete-comment').remove();
 }
 
 function setDeleteCommentBtn() {

@@ -114,7 +114,7 @@
                                 </a>
                                 <p class="p-0 m-0"><small class="text-muted">{{ $post->comments[0]->created_at->diffForHumans() }}</small></p>
                                 @if ($post->comments[0]->user->id == Auth::user()->id)
-                                <div class="commentDelete-btn">🗑️</div>
+                                <div class="commentDelete-btn delete-comment pointer">🗑️</div>
                                 @endif
                             </div>
                             <div class="comment__content--box line-clamp">
