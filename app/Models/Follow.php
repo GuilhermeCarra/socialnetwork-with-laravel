@@ -43,10 +43,34 @@ class Follow extends Model
     public function userFollowed()
     {
         return $this->hasOne('App\Models\User', 'id', 'followed');
+        // return $this->belongsToMany(Follower::class);
     }
 
     public function userFollower()
     {
         return $this->hasOne('App\Models\User', 'id', 'follower');
     }
+
+    protected static function searchFriends(string $username){
+        $id = auth()->user()->id;
+        $friends = [];
+        $friends['following'] = User::with('following')->where('username', 'LIKE', '%' . $username . '%')->whereHas('followers', function($q) use ($id) {
+            $q->where('follower', $id);
+        })->get();
+        $friends['followers'] = User::with('followers')->where('username', 'LIKE', '%' . $username . '%')->whereHas('following', function($q) use ($id) {
+            $q->where('followed', $id);
+        })->get();
+
+        return $friends;
+    }
+
+    public function following(){
+        return $this->hasMany('App\Models\User', 'id', 'followed');
+    }
+    public function follower(){
+        return $this->hasMany('App\Models\User', 'id', 'follower');
+    }
+
+
+
 }

@@ -1,10 +1,10 @@
-<div class="container flex justify-content-lg-between align-items-center">
-    <a class="navbar-brand" href="{{ url('/') }}">
+<div class="container flex justify-content-center justify-content-sm-between align-items-center">
+    <a class="navbar-brand p-0 m-0" href="{{ url('/') }}">
         {{ config('app.name') }}
     </a>
 
         <!-- Right Side Of Navbar -->
-    <ul class="navbar-icons mb-0 ml-auto">
+    <ul class="navbar-icons p-0 mb-0 ml-auto">
             <!-- Authentication Links -->
         @guest
         <li class="nav-item">

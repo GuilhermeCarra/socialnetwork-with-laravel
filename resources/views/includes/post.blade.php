@@ -73,7 +73,7 @@
                     <div class="comment_create">
                         <div class="form-group d-flex flex-nowrap justify-content-between">
                             <textarea class="form-control comment-textarea" name="newcomment" id="coment" cols="30" rows="1"></textarea>
-                            <button class="btn btn-primary mt-auto addComment-btn">Add</button>
+                            <button class="btn btn-primary mt-auto p-0"><i class="ri-add-circle-line text-white addComment-btn"></i></button>
                         </div>
                     </div>
                 </div>

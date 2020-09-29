@@ -38,6 +38,16 @@
             $('body').toggleClass('stop-scroll')
             this.friends.toggleClass('show')
             $('#friends-input').trigger('focus')
+            $.ajax({
+                method: "GET",
+                url: 'search?username=',
+                beforeSend: function(){
+                    $('#friends-result').html()
+                }
+            }).done(function(data){
+                $('#friends-result').html(data.html)
+
+            })
         }
     }
     menu.init()

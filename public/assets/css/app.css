@@ -11012,19 +11012,21 @@ li {
 }
 
 .navbar {
-  height: 50px;
+  height: auto;
 }
 
 .navbar .container {
   font-size: 16px;
 }
 
-.navbar .container .navbar-item {
+.navbar .container .navbar-item,
+.navbar .container .nav-item {
   display: inline-block;
   padding: 9px 3px;
 }
 
-.navbar .container .navbar-item .navbar-link {
+.navbar .container .navbar-item .navbar-link,
+.navbar .container .nav-item .navbar-link {
   display: inline-block;
   margin: 0;
   width: 25px;
@@ -11214,6 +11216,7 @@ li {
 
 .friends .friends-list {
   height: 80%;
+  overflow-y: auto;
 }
 
 .friends.show {
@@ -11232,6 +11235,75 @@ li {
   height: 80%;
   -webkit-animation: opacity1-visibility1 2s forwards;
           animation: opacity1-visibility1 2s forwards;
+}
+
+.friends.show .friend-item {
+  padding: 3px 5px;
+  margin: 2px 0;
+  border-radius: 3px;
+}
+
+.friends.show .friend-item:hover {
+  background-color: rgba(124, 214, 241, 0.05);
+  font-weight: bold;
+}
+
+.friends.show .friend-item:hover .friend-item-action {
+  color: #3f4d51;
+}
+
+.friends.show .friend-item:hover .avatar {
+  transform: scale(1.2);
+}
+
+.friends.show .friend-item a,
+.friends.show .friend-item a:link,
+.friends.show .friend-item a:active,
+.friends.show .friend-item a:visited {
+  color: #f8fafc;
+  padding: 5px 5px;
+  text-decoration: none;
+}
+
+.friends.show .friend-item a:hover,
+.friends.show .friend-item a:link:hover,
+.friends.show .friend-item a:active:hover,
+.friends.show .friend-item a:visited:hover {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.friends.show .following.btn.active,
+.friends.show .followers.btn.active {
+  background-color: rgba(124, 214, 241, 0.35);
+}
+
+.friends .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.friends-list .friends-box {
+  background: #3f4d51;
+  top: -15px;
+}
+
+.friends-list .followers-list {
+  display: none;
+}
+
+.friends-list .following-list {
+  display: block;
+}
+
+.friends-list.followers .followers-list {
+  display: block;
+}
+
+.friends-list.followers .following-list {
+  display: none;
 }
 
 .newpost.show,
@@ -11475,13 +11547,13 @@ li {
   font-size: 18px;
 }
 
-.avatar {
+.post .avatar {
   width: 30px;
   height: 30px;
 }
 
 @media all and (min-width: 576px) {
-  .avatar {
+  .post .avatar {
     width: 45px;
     height: 45px;
   }
