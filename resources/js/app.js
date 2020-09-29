@@ -114,7 +114,6 @@ function addComment(){
 }
 
 function updatePost(post, data) {
-    console.log(data);
     $(post).find('.post-description').text(data.post.description);
     if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
     $(post).find('.card-img-bottom').attr('src',data.post.image);
