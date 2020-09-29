@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follow;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FollowsController extends Controller
@@ -53,6 +54,16 @@ class FollowsController extends Controller
         //
     }
 
+    public function showFriends(Request $request)
+    {
+        $username = $request->username ?? '';
+        $friends = Follow::searchFriends($username);
+
+        if($request->ajax()) {
+            $view = view('includes.friendslist',compact(['friends']))->render();
+            return response()->json(['html'=>$view]);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
