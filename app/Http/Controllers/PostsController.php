@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -43,9 +43,16 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $post = Post::find($request->postId)
+                    ->comments()
+                    ->userReaction;
+        
+        if($request->ajax()) {
+
+            return response()->json(['post'=>$post]);
+        }
     }
 
     /**
