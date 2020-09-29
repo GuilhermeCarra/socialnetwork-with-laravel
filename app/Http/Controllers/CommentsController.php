@@ -41,6 +41,7 @@ class CommentsController extends Controller
 
             $post = Comment::where('id',$comment->id)->first()->post;
             $comments = $post->comments;
+            $reaction = $post->userReaction;
 
             $comments = view('includes.comments',compact(['comments']))->render();
             return response()->json(['comments'=>$comments,'post'=>$post]);
@@ -79,6 +80,7 @@ class CommentsController extends Controller
     {
         $post = Comment::where('post_id',$id)->first()->post;
         $comments = $post->comments;
+        $reaction = $post->userReaction;
 
         if($request->ajax()) {
             $comments = view('includes.comments',compact(['comments']))->render();
@@ -124,10 +126,12 @@ class CommentsController extends Controller
 
         $post = Post::find($postID);
         $post->comments_count--;
+        
         $post->save();
 
         $post = Comment::where('post_id',$postID)->first()->post;
         $comments = $post->comments;
+        $reaction = $post->userReaction;
 
         if($request->ajax()) {
             $comments = view('includes.comments',compact(['comments']))->render();

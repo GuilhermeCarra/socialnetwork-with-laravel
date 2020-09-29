@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -34,7 +36,21 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $userId = auth()->user()->id;
+        $post = new Post;
+        $post->user_id = $userId;
+        $post->description = $request->input('post_content');
+
+        if($request->has('post_image')) {
+            $image = $request->file('post_image');
+            $new_name = now()->timestamp . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('posts_images'), $new_name);
+
+            $post->image = 'posts_images/' . $new_name;
+        }
+        $post->save();
+
+        return $post;
     }
 
     /**

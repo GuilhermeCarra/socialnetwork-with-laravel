@@ -43,11 +43,19 @@
             </div>
             <div class="post__body__reactions d-flex flex-start flex-nowrap align-items-center">
                 <p class="card-text mr-3 mb-0">
-                    <i class="ri-thumb-up-line"></i>
-                    <small class="text-muted likes-count"> {{ $post->likes_count }}</small> 
+                    @if ($post->userReaction['type'] == 'like')
+                    <i class="ri-thumb-up-fill like-btn"></i>
+                    @else
+                    <i class="ri-thumb-up-line like-btn"></i>
+                    @endif
+                    <small class="text-muted likes-count"> {{ $post->likes_count }}</small>
                 </p>
                 <p class="mr-3 mb-0">
-                    <i class="ri-thumb-down-line"></i>
+                @if ($post->userReaction['type'] == 'dislike')
+                    <i class="ri-thumb-down-fill dislike-btn"></i>
+                    @else
+                    <i class="ri-thumb-down-line dislike-btn"></i>
+                    @endif
                     <small class="text-muted dislikes-count">{{ $post->dislikes_count }}</small>
                 </p>
                 <p class="mr-3 mb-0">
