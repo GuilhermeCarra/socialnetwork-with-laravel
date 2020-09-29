@@ -2,7 +2,7 @@
 @section('title', Auth::user()->username)
 @section('content')
     <div class="text-center card-header mb-4">
-        <img class="rounded-lg col-sm-3 col-md-6 col-ld-9" src="{{$user->avatar ?? asset('assets/img/ghost-line.svg')}}" alt="">
+        <img class="rounded-lg col-sm-3 col-md-6 col-lg-4" src="{{$user->avatar ?? asset('assets/img/ghost-line.svg')}}" alt="">
         <p class="h4 text-center mt-4"><b>{{$user->name}}</b></p>
         <p class="h6 text-center my-4">{{$user->description}}</p>
         @if($user->id != auth()->user()->id)
