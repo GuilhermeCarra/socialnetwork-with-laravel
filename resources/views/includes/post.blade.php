@@ -10,11 +10,22 @@
                 </a>
                 <small> {{'@'.$post->user->username }}</small>
             </div>
-            <div class="post__header__menu">
-                <div class="post__header__menu--btn">
-                    <i class="ri-more-2-fill"></i>
+            @auth
+                <div class="post__header__menu">
+                    <div class="post__header__menu--btn">
+                        <i class="ri-more-2-fill"></i>
+                        <div class="post-menu d-flex flex-column m-0 p-0">
+                            <ul>
+                                <li><i class="ri-pencil-line"></i> Edit</li>
+                                <li data-post="{{$post->id}}"><i class="ri-delete-bin-6-line"></i> Delete</li>
+                                {{-- <form id="delete-post" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form> --}}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endauth
         </div>
     </div>
     <div class="card-body">
