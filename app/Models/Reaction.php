@@ -13,7 +13,10 @@ class Reaction extends Model
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'post_id', 'is_like', 'is_dislike'
+        'user_id', 'post_id', 'type'
     ];
 
+    public function getByPostId($postId) {
+        $reaction = Reaction::where('user_id',auth()->user()->id)->where('post_id',$postId)->get();
+    }
 }
