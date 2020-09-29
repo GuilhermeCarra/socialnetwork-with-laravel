@@ -13,6 +13,7 @@ class Post extends Model
         'description', 'image', 'likes_count', 'dislikes_count', 'comments_count'
     ];
 
+    
     /**
      * Get posts by User id
      * Pagination by default: 5
@@ -46,7 +47,8 @@ class Post extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
-    public function reactions() {
-        return $this->hasMany('App\Models\Reaction');
+    public function userReaction()
+    {
+        return $this->hasOne('App\Models\Reaction', 'post_id', 'id')->where('user_id',auth()->user()->id);
     }
 }
