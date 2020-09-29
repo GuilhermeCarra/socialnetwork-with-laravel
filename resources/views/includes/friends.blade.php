@@ -8,6 +8,5 @@
         </div>
     </div>
     <div class="friends-list" id="friends-result">
-        @include('includes.friendslist')
     </div>
 </div>
