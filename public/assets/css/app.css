@@ -11539,6 +11539,10 @@ li {
   font-size: clamp(15px, 2vw, 18px);
 }
 
+.card.post .card-body .post__body__reactions p {
+  cursor: pointer;
+}
+
 .card.post .card-footer {
   padding: 0.25rem 0.5rem;
 }
@@ -11557,6 +11561,47 @@ li {
     width: 45px;
     height: 45px;
   }
+}
+
+.post__header__menu--btn {
+  position: relative;
+}
+
+.post-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0;
+  max-width: 80px;
+  width: 0;
+  max-width: 110px;
+  overflow: hidden;
+  font-size: 14px;
+  background-color: rgba(164, 184, 190, 0.7);
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.post-menu.open {
+  left: -100px;
+  top: 10px;
+  width: 200px;
+  height: 100px;
+}
+
+.post-menu.open ul {
+  margin: 0;
+  padding: 0;
+}
+
+.post-menu.open ul li {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.post-menu.open ul li:hover {
+  background-color: #a4b8be;
 }
 
 .comment.preview {
