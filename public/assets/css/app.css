@@ -10967,10 +10967,6 @@ li {
   background-color: #d75548;
 }
 
-.bg-green {
-  background-color: #38c172;
-}
-
 .bg-light-gray {
   background-color: rgba(63, 77, 81, 0.1);
 }
@@ -11274,16 +11270,40 @@ li {
 .friends.show .friend-item a:active:hover,
 .friends.show .friend-item a:visited:hover {
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
-.friends.show .friend-item a .avatar,
-.friends.show .friend-item a:link .avatar,
-.friends.show .friend-item a:active .avatar,
-.friends.show .friend-item a:visited .avatar {
+.friends.show .following.btn.active,
+.friends.show .followers.btn.active {
+  background-color: rgba(124, 214, 241, 0.35);
+}
+
+.friends .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 5px;
+}
+
+.friends-list .friends-box {
+  background: #3f4d51;
+  top: -15px;
+}
+
+.friends-list .followers-list {
+  display: none;
+}
+
+.friends-list .following-list {
+  display: block;
+}
+
+.friends-list.followers .followers-list {
+  display: block;
+}
+
+.friends-list.followers .following-list {
+  display: none;
 }
 
 .newpost.show,
