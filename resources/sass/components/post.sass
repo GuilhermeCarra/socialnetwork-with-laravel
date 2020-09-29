@@ -26,6 +26,8 @@
         .post__body__reactions
             margin: .5rem 0
             font-size: clamp(15px, 2vw, 18px)
+            p
+                cursor: pointer
     .card-footer
         padding: 0.25rem 0.5rem
         .comment__create .btn
@@ -37,3 +39,33 @@
     @media all and ( min-width: 576px )
         width: 45px
         height: 45px
+
+.post__header__menu--btn
+    position: relative
+.post-menu
+    position: absolute
+    top: 0
+    left: 0
+    height: 0
+    max-width: 80px
+    width: 0
+    max-width: 110px
+    overflow: hidden
+    font-size: 14px
+    background-color: rgba($gray-primary, .7)
+    border-radius: 5px
+    transition: all .3s ease-in-out
+    &.open
+        left: -100px
+        top: 10px
+        width: 200px
+        height: 100px
+        ul
+            margin: 0
+            padding: 0
+            li
+                padding: 10px
+                margin: 5px
+                border-radius: 5px
+                &:hover
+                    background-color: rgba($gray-primary, 1)
