@@ -7,6 +7,15 @@
             </div>
         </div>
     </div>
-    <div class="friends-list" id="friends-result">
+    <div class="friends-list px-0 px-sm-1">
+        <div class="friends-box d-flex flex-nowrap justify-content-between mb-3 sticky-top">
+            <div class="following btn border w-50 m-1 text-center py-2 text-white active">
+                Following
+            </div>
+            <div class="followers btn border w-50 m-1 text-center py-2 text-white">
+                followers
+            </div>
+        </div>
+        <div id="friends-result"></div>
     </div>
 </div>
