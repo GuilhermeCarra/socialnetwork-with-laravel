@@ -50,9 +50,25 @@
                 &:hover
                     font-weight: bold
                     letter-spacing: 1px
-                .avatar
-                    width: 40px
-                    height: 40px
-                    border-radius: 50%
-                    margin-right: 5px
+        .following.btn.active, .followers.btn.active
+            background-color: rgba($blue-secondary, .35)
+    .avatar
+        width: 40px
+        height: 40px
+        border-radius: 50%
+        margin-right: 5px
+
+.friends-list 
+    .friends-box
+        background: $dark-primary
+        top: -15px
+    .followers-list
+        display: none
+    .following-list
+        display: block
+.friends-list.followers 
+    .followers-list
+        display: block
+    .following-list
+        display: none
 
