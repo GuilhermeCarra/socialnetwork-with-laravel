@@ -27,16 +27,8 @@
             <a class="navbar-link" href="{{ route('home') }}"><i class="ri-home-5-{{Request::is('/') || Request::is('home') ? 'fill' : 'line'}}"></i></a>
         </li>
 
-        <li class="navbar-item">
-            <a class="navbar-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                         document.getElementById('logout-form').submit();">
-                <i class="ri-logout-box-r-line"></i>
-            </a>
-        </li>
+        <li class="navbar-item"><a class="navbar-link" href="{{url(auth()->user()->username)}}"><i class="ri-user-3-line"></i></a></li>
 
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
         @endguest
     </ul>
 </div>
