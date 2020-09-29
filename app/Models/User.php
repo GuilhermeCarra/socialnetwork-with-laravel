@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Reaction;
 
 class User extends Authenticatable
 {
@@ -69,5 +70,16 @@ class User extends Authenticatable
         return $this->following()->pluck('followed')->toArray();
     }
 
+    public function reactions() {
+        return $this->hasMany('App\Models\Reaction', 'user_id', 'id');
+    }
 
+    public function getReactionType($postId) {
+        $reaction = $this->reactions->keyBy('post_id');
+        if (!isset($reaction[$postId])) {
+            return null;
+        } else {
+            return $reaction[$postId]->type;
+        }
+    }
 }
