@@ -18,6 +18,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function(){
+    Route::get('/search', [App\Http\Controllers\FollowsController::class, 'showFriends']);
     Route::get('/{username}', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/comments/post/{id}', [App\Http\Controllers\CommentsController::class, 'loadPostComments']);
     Route::post('/comments/create/{id}', [App\Http\Controllers\CommentsController::class, 'create']);
