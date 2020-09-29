@@ -11,9 +11,10 @@ document.onreadystatechange = () => {
 
 $(document).ready(function () {
     setLoadCommentsBtn();
-    setTextareaHeightAuto()
+    setTextareaHeightAuto();
     setAddCommentBtn();
     setDeleteCommentBtn();
+    setReactionsBtns();
 });
 
 var postsPage = 1;
@@ -44,6 +45,7 @@ function loadPosts() {
             setLoadCommentsBtn();
             setAddCommentBtn();
             setDeleteCommentBtn();
+            setReactionsBtns();
         }
     });
 }
@@ -112,7 +114,7 @@ function addComment(){
 }
 
 function updatePost(post, data) {
-
+    console.log(data);
     $(post).find('.post-description').text(data.post.description);
     if(data.post.image != null) $(post).find('.card-img-bottom').removeClass('d-none');
     $(post).find('.card-img-bottom').attr('src',data.post.image);
@@ -120,7 +122,20 @@ function updatePost(post, data) {
     $(post).find('.likes-count').text(data.post.likes_count);
     $(post).find('.comments-count').text(data.post.comments_count);
 
-    if(data.comments.length) {
+    const like = $(post).find('[class^="ri-thumb-up"]');
+    const dislike = $(post).find('[class^="ri-thumb-down"]');
+    if(data.post.user_reaction === null) {
+        $(like).removeClass().addClass('ri-thumb-up-line');
+        $(dislike).removeClass().addClass('ri-thumb-down-line');
+    } else if (data.post.user_reaction.type == 'dislike') {
+        $(like).removeClass().addClass('ri-thumb-up-line');
+        $(dislike).removeClass().addClass('ri-thumb-down-fill');
+    } else {
+        $(like).removeClass().addClass('ri-thumb-up-fill');
+        $(dislike).removeClass().addClass('ri-thumb-down-line');
+    }
+
+    if(data.comments !== undefined) {
         var commentBox = $(post).find('.comments-container');
         var commentsBtn = $(post).find('.comments-guide');
 
@@ -131,8 +146,10 @@ function updatePost(post, data) {
             $(commentBox).prepend(data.comments);
         }
     } else {
-        for (let comment of data.post.comments) {
-            $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+        if(data.post.comments.length > 1) {
+            for (let comment of data.post.comments) {
+                $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+            }
         }
     }
     $(commentBox).on('click','.commentDelete-btn',deleteComment);
@@ -158,3 +175,45 @@ function deleteComment() {
         updatePost(post,data);
     });
 }
+
+function setReactionsBtns() {
+    $('.like-btn').each(function () {
+        $(this).on('click', likePost);
+        $(this).removeClass('like-btn');
+    });
+    $('.dislike-btn').each(function () {
+        $(this).on('click', dislikePost);
+        $(this).removeClass('dislike-btn');
+    });
+}
+
+function likePost(){
+    var post = $(event.target).closest('.post');
+    var id = $(post).attr('data-post');
+    var type = $(event.target).hasClass('ri-thumb-up-fill') ? 'DELETE' : 'POST';
+    $.ajax({
+        url: 'reactions/like/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+    }).done(function(data) {
+        updatePost(post,data);
+    });
+}
+
+function dislikePost(){
+    var post = $(event.target).closest('.post');
+    var id = $(post).attr('data-post');
+    var type = $(event.target).hasClass('ri-thumb-down-fill') ? 'DELETE' : 'POST';
+    $.ajax({
+        url: 'reactions/dislike/' + id,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: type,
+    }).done(function(data) {
+        updatePost(post,data);
+    });
+}
+
