@@ -46,17 +46,17 @@ function uploadPost(entries) {
     entries.forEach((entry) => {
 
         if(entry.isIntersecting){
-            let postId = entry.target
+            let post = entry.target
+            let postId = entry.target.dataset.post
             $.ajax({
                 url: 'post/show',
                 type: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                data: {postId: postId.dataset.post}
+                data: {postId: postId}
             }).done(function(response){
-                console.log(response);
-                updatePost(postId, response)
+                updatePost(post, response)
             })
 
         }
