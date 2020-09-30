@@ -60,13 +60,11 @@ class PostsController extends Controller
      */
     public function show(Request $request)
     {
-        $post = Post::find($request->postId)
-                    ->comments()
-                    ->userReaction;
-        
+        $post = Post::with('comments')->with('userReaction')->find($request->postId);
+
         if($request->ajax()) {
 
-            return response()->json(['post'=>$post]);
+            return response()->json(['post' => $post]);
         }
     }
 
