@@ -10,22 +10,23 @@
                 </a>
                 <small> {{'@'.$post->user->username }}</small>
             </div>
-            @auth
+            @if ($post->user_id == Auth::user()->id)
                 <div class="post__header__menu">
                     <div class="post__header__menu--btn">
                         <i class="ri-more-2-fill"></i>
                         <div class="post-menu d-flex flex-column m-0 p-0">
                             <ul>
                                 <li><i class="ri-pencil-line"></i> Edit</li>
-                                <li data-post="{{$post->id}}"><i class="ri-delete-bin-6-line"></i> Delete</li>
-                                {{-- <form id="delete-post" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <li data-post-delete="{{$post->id}}"><i class="ri-delete-bin-6-line"></i> Delete</li>
+                                {{-- <form id="delete-post-{{$post->id}}" action="{{ route('delete', $post->id) }}" method="POST" class="d-none">
+                                    @method('DELETE')
                                     @csrf
                                 </form> --}}
                             </ul>
                         </div>
                     </div>
                 </div>
-            @endauth
+            @endif
         </div>
     </div>
     <div class="card-body">
