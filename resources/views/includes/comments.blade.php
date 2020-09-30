@@ -12,8 +12,8 @@
                         {{ $comment->user->name }}
                     </a>
                     <p class="p-0 m-0"><small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small></p>
-                    @if ($comment->user->id == Auth::user()->id)
-                        <div class="commentDelete-btn pointer delete-comment">🗑️</div>
+                    @if ($comment->user->id === Auth::user()->id)
+                    <div class="commentDelete-btn delete-comment"><i class="ri-delete-bin-6-line"></i></div>
                     @endif
                 </div>
                 <div class="comment__content--box">
