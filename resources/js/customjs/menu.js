@@ -30,6 +30,10 @@
             this.openMenu()
             this.newPost.toggleClass('show')
             $('#textarea-newpost-content').trigger('focus')
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
         },
         openFriends: function () {
             this.openMenu()
