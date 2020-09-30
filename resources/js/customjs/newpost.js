@@ -36,7 +36,6 @@
         },
         closeNewPost: function(e){
             this.form.trigger("reset")
-            $('body').removeClass('stop-scroll')
             this.newPost.removeClass('show')
         }
     }

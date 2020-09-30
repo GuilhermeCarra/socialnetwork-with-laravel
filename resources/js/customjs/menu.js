@@ -28,14 +28,12 @@
         openNewPost: function () {
             $('#friends.show, #search.show').removeClass('show')
             this.openMenu()
-            $('body').toggleClass('stop-scroll')
             this.newPost.toggleClass('show')
             $('#textarea-newpost-content').trigger('focus')
         },
         openFriends: function () {
             this.openMenu()
             $('#newpost.show, #search.show').removeClass('show')
-            $('body').toggleClass('stop-scroll')
             this.friends.toggleClass('show')
             $('#friends-input').trigger('focus')
             $.ajax({

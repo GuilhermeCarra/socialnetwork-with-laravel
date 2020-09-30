@@ -44,7 +44,6 @@
         closeFriends: function () {
             this.input.val("")
             this.results.removeClass('searching')
-            $('body').removeClass('stop-scroll')
             this.friends.removeClass('show')
         }
     }
