@@ -176,6 +176,8 @@ function updatePost(post, data) {
     $(post).find('.dislikes-count').text(data.post.dislikes_count);
     $(post).find('.likes-count').text(data.post.likes_count);
     $(post).find('.comments-count').text(data.post.comments_count);
+    var commentBox = $(post).find('.comments-container');
+    var commentsBtn = $(post).find('.comments-guide');
 
     const like = $(post).find('[class^="ri-thumb-up"]');
     const dislike = $(post).find('[class^="ri-thumb-down"]');
@@ -191,20 +193,20 @@ function updatePost(post, data) {
     }
 
     if(data.comments !== undefined) {
-        var commentBox = $(post).find('.comments-container');
-        var commentsBtn = $(post).find('.comments-guide');
-
         if ($(commentsBtn).text().includes('See more comments...')) {
-            // $(commentsBtn).trigger('click');
             updateFirstPost(data.post.comments[0], commentBox)
         } else {
             $(commentBox).find('.comment').remove();
             $(commentBox).prepend(data.comments);
         }
     } else {
-        if(data.post.comments.length > 1) {
-            for (let comment of data.post.comments) {
-                $('[data-comment='+comment.id+']').find('.card-text').text(comment.content);
+        if(data.post.comments.length > 0) {
+            if($(commentsBtn).text().includes('See more comments...')) {
+                updateFirstPost(data.post.comments[0], commentBox)
+            } else {
+                for (let comment of data.post.comments) {
+                    $('[data-comment="'+comment.id+'"]').find('.card-text').text(comment.content);
+                }
             }
         }
     }
@@ -215,11 +217,17 @@ function updateFirstPost(commentData, container) {
     var comment = $(container).find('.comment');
     $(comment).attr('data-comment',commentData.id);
     $(comment).find('.card-text').text(commentData.content);
-    $(comment).find('img').attr('src',commentData.user.avatar);
-    var links = $(comment).find('a');
-    $(links[0]).attr('href',commentData.user.username);
-    $(links[1]).attr('href',commentData.user.username).text(commentData.user.name);
-    $(comment).find('.delete-comment').remove();
+    $.ajax({
+        url: 'user/' + commentData.user_id,
+        type: 'GET',
+    }).done(function (user) {
+        console.log(user)
+        $(comment).find('img').attr('src',user.avatar);
+        var links = $(comment).find('a');
+        $(links[0]).attr('href',user.username);
+        $(links[1]).attr('href',user.username).text(user.name);
+        $(comment).find('.delete-comment').remove();
+    });
 }
 
 function setDeleteCommentBtn() {

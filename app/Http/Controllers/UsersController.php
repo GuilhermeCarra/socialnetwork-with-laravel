@@ -70,9 +70,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()) {
+            $user = User::find($id);
+            return response()->json($user);
+        }
     }
 
     /**
