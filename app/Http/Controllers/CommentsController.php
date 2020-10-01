@@ -26,6 +26,17 @@ class CommentsController extends Controller
      */
     public function create(Request $request, $id)
     {
+       
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, $id)
+    {
         if($request->ajax()) {
 
             $user = auth()->user();
@@ -46,17 +57,6 @@ class CommentsController extends Controller
             $comments = view('includes.comments',compact(['comments']))->render();
             return response()->json(['comments'=>$comments,'post'=>$post]);
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
