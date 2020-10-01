@@ -11,14 +11,12 @@ const post = {
     bindEvents: function () {
         this.postMenuBtn.each(function () {
             $(this).on('click', '.ri-more-2-fill', function () {
-                console.log("hola")
                 $(this).next().addClass('open')
                 $(this).addClass('ri-close-line').removeClass('ri-more-2-fill')
             })
         })
         this.postMenuBtn.each(function () {
             $(this).on('click', '.ri-close-line', function () {
-                console.log("hola")
                 $(this).next().removeClass('open')
                 $(this).addClass('ri-more-2-fill').removeClass('ri-close-line')
             })
@@ -32,9 +30,6 @@ const post = {
                 },
                 data: id,
                 type: 'DELETE',
-                cache : false,
-                processData: false,
-                contentType: false
             }).done(function() {
                 $(`[data-post="${id}"]`).fadeOut();
             });
