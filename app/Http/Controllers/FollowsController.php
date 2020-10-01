@@ -37,9 +37,10 @@ class FollowsController extends Controller
     public function store(Request $request)
     {
         if (Follow::create($request->all())) {
-            echo "follow";
-        } else {
-            echo "error";
+        $user = User::find($request->followed);
+        $following = 1;
+
+            return view('includes.followform',compact(['user', 'following']));
         }
     }
 
@@ -95,7 +96,11 @@ class FollowsController extends Controller
      */
     public function destroy(Request $request)
     {
-        Follow::where('follower', $request->follower)->where('followed', $request->followed)->delete();
-        echo "deleted";
+        $id = (int)$request->followed;
+        $user = User::find($id);
+        $follow = Follow::where('follower', $request->follower)->where('followed', $request->followed)->delete();
+        $following = 0;
+
+        return view('includes.followform',compact(['user', 'following']));
     }
 }
