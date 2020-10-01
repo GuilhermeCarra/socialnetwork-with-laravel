@@ -2,6 +2,7 @@ import {
     post
 } from 'jquery';
 import {
+    remove,
     update
 } from 'lodash';
 import 'remixicon/fonts/remixicon.css'
@@ -13,6 +14,7 @@ document.onreadystatechange = () => {
     require('./customjs/friends');
     require('./customjs/newpost');
     require('./customjs/post');
+    require('./customjs/profile');
 }
 
 $(document).ready(function () {
@@ -210,6 +212,7 @@ function updatePost(post, data) {
             }
         }
     }
+    $(commentBox).off()
     $(commentBox).on('click', '.commentDelete-btn', deleteComment);
 }
 
@@ -232,12 +235,14 @@ function updateFirstPost(commentData, container) {
 
 function setDeleteCommentBtn() {
     $('.commentDelete-btn').each(function () {
+        $(this).off()
         $(this).on('click', deleteComment);
         $(this).removeClass('commentDelete-btn');
     });
 }
 
 function deleteComment() {
+    
     var id = $(event.target).closest('.comment').attr('data-comment');
     var post = $(event.target).closest('.post');
     $.ajax({
@@ -246,6 +251,11 @@ function deleteComment() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: 'DELETE',
+        beforeSend(){
+            let parent = $(event.target).parent()
+            $(event.target).remove()
+            parent.append('<small class="ml-1">deleting</small>')
+        }
     }).done(function (data) {
         updatePost(post, data);
     });

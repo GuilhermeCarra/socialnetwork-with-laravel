@@ -28,14 +28,16 @@
         openNewPost: function () {
             $('#friends.show, #search.show').removeClass('show')
             this.openMenu()
-            $('body').toggleClass('stop-scroll')
             this.newPost.toggleClass('show')
             $('#textarea-newpost-content').trigger('focus')
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
         },
         openFriends: function () {
             this.openMenu()
             $('#newpost.show, #search.show').removeClass('show')
-            $('body').toggleClass('stop-scroll')
             this.friends.toggleClass('show')
             $('#friends-input').trigger('focus')
             $.ajax({

@@ -4,15 +4,17 @@
             <i class="ri-close-circle-line text-white"></i>
         </div>
         <form action="" method="POST" id="newpost-form">
-            <div class="form-group">
-                <label for="">Text</label>
+            <h3 class="text-light">New Post</h3>
+            @csrf
+            <div class="form-group text-light">
+                <label for="textarea-newpost-content">What are you thinking? </label>
                 <textarea class="form-control shadow" name="post_content" id="textarea-newpost-content" cols="30" rows="10"></textarea>
             </div>
-            <div class="form-group">
-                <label for="post_image"></label>
-                <input type="file" name="post_image" id="post_image">
-            </div>
-            <div class="form-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="post_image" id="post_image">
+                <label class="custom-file-label" for="post_image">Choose file</label>
+              </div>
+            <div class="form-group mt-4">
                 <input type="submit" value="Post" class="btn btn-primary text-white shadow">
             </div>
         </form>

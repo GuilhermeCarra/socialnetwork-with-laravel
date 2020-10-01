@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/{username}', [App\Http\Controllers\UsersController::class, 'index']);
     Route::post('/post/show', [App\Http\Controllers\PostsController::class, 'show']);
     Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
+    Route::delete('/post/{id}/delete', [App\Http\Controllers\PostsController::class, 'destroy'])->name('delete');
     Route::get('/comments/post/{id}', [App\Http\Controllers\CommentsController::class, 'loadPostComments']);
     Route::post('/comments/create/{id}', [App\Http\Controllers\CommentsController::class, 'create']);
     Route::delete('/comments/delete/{id}', [App\Http\Controllers\CommentsController::class, 'destroy']);
