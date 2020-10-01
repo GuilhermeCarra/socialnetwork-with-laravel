@@ -32,10 +32,10 @@ php artisan serv //check the project
 ````
 ## Credentials
 To log on the network you can:
-* **register** yourself 
+* **register** yourself
 * or take a look at a **profile** created with faker/seeder:
 ````
-mySQL > select email from users; // chosse a email from the database
+mySQL > select email from users; // choose a email from the database
 email: (from database)
 password: password
 ````
