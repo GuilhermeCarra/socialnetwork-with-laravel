@@ -14,6 +14,7 @@ document.onreadystatechange = () => {
     require('./customjs/friends');
     require('./customjs/newpost');
     require('./customjs/post');
+    require('./customjs/profile');
 }
 
 $(document).ready(function () {
