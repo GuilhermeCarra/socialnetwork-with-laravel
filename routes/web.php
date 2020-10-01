@@ -19,6 +19,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function(){
     Route::get('/search', [App\Http\Controllers\FollowsController::class, 'showFriends']);
+    Route::get('/user/{id}', [App\Http\Controllers\UsersController::class, 'show']);
     Route::get('/{username}', [App\Http\Controllers\UsersController::class, 'index']);
     Route::post('/post/show', [App\Http\Controllers\PostsController::class, 'show']);
     Route::post('/post', [App\Http\Controllers\PostsController::class, 'store']);
