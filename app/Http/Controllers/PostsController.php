@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -100,6 +101,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        Comment::where('post_id', $id)->delete();
         $post->delete();
     }
 }
