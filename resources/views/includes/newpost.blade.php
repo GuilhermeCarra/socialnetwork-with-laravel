@@ -12,7 +12,7 @@
             </div>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" name="post_image" id="post_image">
-                <label class="custom-file-label" for="post_image">Choose file</label>
+                <label class="custom-file-label" for="post_image" accept="image/x-png,image/gif,image/jpeg">Choose file</label>
               </div>
             <div class="form-group mt-4">
                 <input type="submit" value="Post" class="btn btn-primary text-white shadow">
