@@ -40,17 +40,6 @@ class Follow extends Model
         return Follow::where('follower', $id)->where('followed', auth()->user()->id)->count();
     }
 
-    public function userFollowed()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'followed');
-        // return $this->belongsToMany(Follower::class);
-    }
-
-    public function userFollower()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'follower');
-    }
-
     protected static function searchFriends(string $username){
         $id = auth()->user()->id;
         $friends = [];
@@ -63,14 +52,5 @@ class Follow extends Model
 
         return $friends;
     }
-
-    public function following(){
-        return $this->hasMany('App\Models\User', 'id', 'followed');
-    }
-    public function follower(){
-        return $this->hasMany('App\Models\User', 'id', 'follower');
-    }
-
-
 
 }
