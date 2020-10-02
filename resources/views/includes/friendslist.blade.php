@@ -5,14 +5,27 @@
             <a href="{{url($friend->username)}}">
                 <img class="avatar" src="{{$friend->avatar}}" alt="avatar {{$friend->username}}">
             </a>
-            <a href="{{url($friend->username)}}">
-                <p class="p-0 m-0 line-clamp">{{'@' . $friend->username}}</p>
-                <small class="text-muted">follows you</small>
+            <a class="line-clamp-2" href="{{url($friend->username)}}">
+                <p class="p-0 m-0 ">{{'@' . $friend->username}}</p>
+                @if(is_numeric(array_search(auth()->user()->id, array_column($friend['following']->toArray(), 'followed'))))
+                    <small class="text-muted">Follows you - 
+                @else
+                    <small class="text-muted">Doesn't follow you 
+                @endif
+                @php
+                $count = 0;
+                foreach ($friends['following'] as $authFollowing){
+                    foreach ($friend['following'] as $friendb){
+                        if($friendb['followed'] == $authFollowing->id){
+                            $count++;
+                        }
+                    }
+                }
+                echo $count > 0 ? "- Mutual friends $count" : "";
+                @endphp
+                </small>
             </a>
         </div>
-        {{-- <div class="friend-item-action">
-            <div class="btn btn-sm btn-primary">unfollow</div>
-        </div> --}}
     </div>
     @endforeach
 </div>
@@ -25,16 +38,21 @@
             </a>
             <a href="{{url($friend->username)}}">
                 <p class="p-0 m-0 line-clamp">{{'@' . $friend->username}}</p>
+                <small class="text-muted">
+                @php
+                $count = 0;
+                foreach ($friends['following'] as $authFollowing){
+                    foreach ($friend['following'] as $friendb){
+                        if($friendb['followed'] == $authFollowing->id){
+                            $count++;
+                        }
+                    }
+                }
+                echo $count > 0 ? "Mutual friends $count" : "";
+                @endphp
+                </small>
             </a>
         </div>
-        {{-- <div class="friend-item-action">
-            @if(auth()->user()->following['followed'] = $friend->id)
-            <div class="btn btn-sm btn-primary">unfollow</div>
-            @else
-            <div class="btn btn-sm btn-primary">follow</div>
-            @endif
-
-        </div> --}}
     </div>
     @endforeach
 </div>
