@@ -3,9 +3,9 @@
 @section('content')
 <div class="card profile">
     <div class="text-center card-header mb-4">
-        <img class="rounded-lg col-sm-3 col-md-6 col-lg-4" src="{{$user->avatar ?? asset('assets/img/ghost-line.svg')}}" alt="">
+        <div class="profile-image mx-auto shadow" style="background-image: url({{$user->avatar ?? asset('assets/img/ghost-line.svg')}});"></div>
         <p class="h4 text-center mt-4"><b>{{$user->name}}</b></p>
-        <p class="h6 text-center my-4">{{$user->description}}</p>
+        <p class="description h6 text-center mb-4 mx-auto ">{{$user->description}}</p>
         <div id="form-follow-container">
 
            @include('includes.followform')
