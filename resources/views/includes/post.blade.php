@@ -18,10 +18,6 @@
                             <ul>
                                 <li><i class="ri-pencil-line"></i> Edit</li>
                                 <li data-post-delete="{{$post->id}}"><i class="ri-delete-bin-6-line"></i> Delete</li>
-                                {{-- <form id="delete-post-{{$post->id}}" action="{{ route('delete', $post->id) }}" method="POST" class="d-none">
-                                    @method('DELETE')
-                                    @csrf
-                                </form> --}}
                             </ul>
                         </div>
                     </div>
