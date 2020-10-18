@@ -1,12 +1,8 @@
 # Social Network
 ---
-## Pill Overview
+## Overview
 This project is consisted a social network that allows users to interact with each other by publishing posts, commenting and giving likes or dislikes to them.
 To do this, it was applied knowledge about the Laravel framework, PHP and Javascript.
-## Documentation
-* [Presentation](https://drive.google.com/file/d/1pPQMyUqhtuPM6A1JjxdC7SLoOPvRagPR/view?usp=sharing)
-* [Task List](https://docs.google.com/spreadsheets/d/1WlAGvgiI4W0py7S-Z1LSwHA7ExpVnQDsUeW01bsZjh8/edit?usp=sharing)
-
 ## Getting Started
 After cloning this repository, excute the folowing commands to test it:
 ````
